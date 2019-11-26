@@ -26,8 +26,14 @@ public class CurvedWall extends Wall
         this.outerRadius = inputOuterRadius;
         this.innerRadius = outerRadius - thickness;
 
-        this.outerAntiCenter = new Point(center.x + outerRadius*Math.cos(startAngle), center.y + outerRadius*Math.sin(endAngle));
-        this.innerAntiCenter = new Point(center.x + innerRadius*Math.cos(startAngle), center.y + innerRadius*Math.sin(endAngle));
+        // In order to get the anticenters correct, we need to know the sign of
+        // the sine and cosine of angles swept out by this curve.
+        double middleAngle = (startAngle + endAngle) / 2;
+        double signOfCos = Math.abs(Math.cos(middleAngle)) / Math.cos(middleAngle);
+        double signOfSin = Math.abs(Math.sin(middleAngle)) / Math.sin(middleAngle);
+
+        this.outerAntiCenter = new Point(center.x + outerRadius*signOfCos, center.y + outerRadius*signOfSin);
+        this.innerAntiCenter = new Point(center.x + innerRadius*signOfCos, center.y + innerRadius*signOfSin);
 
         this.p1 = new Point(center.x + innerRadius*Math.cos(startAngle), center.y + innerRadius*Math.sin(startAngle));
         this.p2 = new Point(center.x + outerRadius*Math.cos(startAngle), center.y + outerRadius*Math.sin(startAngle));
