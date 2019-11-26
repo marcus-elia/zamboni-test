@@ -22,4 +22,27 @@ public class Point
     {
         return this.distanceToOtherPoint(otherPoint.x, otherPoint.y);
     }
+
+    // Return the angle (between 0 and 2pi) from this point to the other point
+    public double angleToPoint(Point otherPoint)
+    {
+        double tanInv = Math.atan2(otherPoint.y - y, otherPoint.x - x);
+
+        // Since atan has a restricted range, get the things in quandrants II and III
+        if(otherPoint.x - x < 0)
+        {
+            tanInv += Math.PI;
+        }
+
+        // Ensure the output is between 0 and 2pi
+        if(tanInv >= 2*Math.PI)
+        {
+            return tanInv - 2*Math.PI;
+        }
+        if(tanInv < 0)
+        {
+            return tanInv + 2*Math.PI;
+        }
+        return tanInv;
+    }
 }
