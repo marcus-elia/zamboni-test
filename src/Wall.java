@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public abstract class Wall
 {
     // The points are swept out clockwise from the 0 angle
@@ -12,6 +14,10 @@ public abstract class Wall
     {
 
     }
+
+    public abstract void tick();
+
+    public abstract void render(Graphics2D g2d);
 
     public abstract boolean isInWall(Point p);
 }
