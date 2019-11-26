@@ -13,5 +13,5 @@ public abstract class Wall
 
     }
 
-    public abstract double distanceFromWall(Point p);
+    public abstract boolean isInWall(Point p);
 }
