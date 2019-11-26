@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class Game extends Canvas implements Runnable
 {
-    public static final int WIDTH = 768, HEIGHT = 3*WIDTH/2;
+    public static final int WIDTH = 324, HEIGHT = 512;
     private Thread thread;
     private boolean running = false;
 
