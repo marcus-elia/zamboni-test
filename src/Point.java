@@ -13,6 +13,12 @@ public class Point
         this.y = inputY;
     }
 
+    // =====================================
+    //
+    //          Geometry Functions
+    //
+    // ====================================
+
     // Return the Euclidean distance to another set of coordinates
     public double distanceToOtherPoint(double x2, double y2)
     {
@@ -44,5 +50,20 @@ public class Point
             return tanInv + 2*Math.PI;
         }
         return tanInv;
+    }
+
+    // Returns the point whose coordinates are p rotated around this by theta radians
+    public Point rotateAroundThis(Point p, double theta)
+    {
+        // Translate the point to the origin
+        double shiftedX = p.x - this.x;
+        double shiftedY = p.y - this.y;
+
+        // Rotate around the origin
+        double newX = shiftedX*Math.cos(theta) - shiftedY*Math.sin(theta);
+        double newY = shiftedX*Math.sin(theta) + shiftedY*Math.cos(theta);
+
+        // Translate it back
+        return new Point(newX + this.x, newY + this.y);
     }
 }
