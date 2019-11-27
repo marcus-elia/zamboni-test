@@ -53,11 +53,11 @@ public class Point
     }
 
     // Returns the point whose coordinates are p rotated around this by theta radians
-    public Point rotateAroundThis(Point p, double theta)
+    public Point rotateAroundThis(double px, double py, double theta)
     {
         // Translate the point to the origin
-        double shiftedX = p.x - this.x;
-        double shiftedY = p.y - this.y;
+        double shiftedX = px - this.x;
+        double shiftedY = py - this.y;
 
         // Rotate around the origin
         double newX = shiftedX*Math.cos(theta) - shiftedY*Math.sin(theta);
@@ -65,5 +65,9 @@ public class Point
 
         // Translate it back
         return new Point(newX + this.x, newY + this.y);
+    }
+    public Point rotateAroundThis(Point p, double theta)
+    {
+        return this.rotateAroundThis(p.x, p.y, theta);
     }
 }
