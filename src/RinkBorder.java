@@ -82,4 +82,37 @@ public class RinkBorder
         }
     }
 
+    // Getters
+    public StraightWall getLeftWall()
+    {
+        return this.leftWall;
+    }
+    public StraightWall getRightWall()
+    {
+        return this.rightWall;
+    }
+    public StraightWall getTopWall()
+    {
+        return this.topWall;
+    }
+    public StraightWall getBottomWall()
+    {
+        return this.bottomWall;
+    }
+    public CurvedWall getTopLeftWall()
+    {
+        return this.topLeftWall;
+    }
+    public CurvedWall getTopRightWall()
+    {
+        return this.topRightWall;
+    }
+    public CurvedWall getBottomRightWall()
+    {
+        return this.bottomRightWall;
+    }
+    public CurvedWall getBottomLeftWall()
+    {
+        return this.bottomLeftWall;
+    }
 }
