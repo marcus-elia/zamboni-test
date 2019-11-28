@@ -41,4 +41,8 @@ public class GameManager
     {
         return this.zamboni;
     }
+    public double getCornerRadius()
+    {
+        return this.windowHeight/8;
+    }
 }
