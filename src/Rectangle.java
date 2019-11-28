@@ -86,12 +86,12 @@ public class Rectangle
         }
     }
 
-    // =================================
+    // =========================================
     //
-    //       Functions for Finding
-    //          the Corners
+    //          Functions for Finding
+    //              the Corners
     //
-    // ================================
+    // ========================================
 
 
     // Set the corners based on the other variables of the rectangle
@@ -121,10 +121,46 @@ public class Rectangle
         this.calculateCorner4();
     }
 
+    // Return the max value of four doubles
+    public double max4(double d1, double d2, double d3, double d4)
+    {
+        double maxSoFar = d1;
+        if(d2 > d1)
+        {
+            maxSoFar = d2;
+        }
+        if(d3 > maxSoFar)
+        {
+            maxSoFar = d3;
+        }
+        return Math.max(maxSoFar, d4);
+    }
+    public double min4(double d1, double d2, double d3, double d4)
+    {
+        return -max4(-d1, -d2, -d3, -d4);
+    }
+
+    public double getLeftest()
+    {
+        return min4(corner1.x, corner2.x, corner3.x, corner4.x);
+    }
+    public double getRightest()
+    {
+        return max4(corner1.x, corner2.x, corner3.x, corner4.x);
+    }
+    public double getHighest()
+    {
+        return min4(corner1.y, corner2.y, corner3.y, corner4.y);
+    }
+    public double getLowest()
+    {
+        return max4(corner1.y, corner2.y, corner3.y, corner4.y);
+    }
+
     // =======================================================
     //
-    //             Functions for Moving
-    //                 the Rectangle
+    //                Functions for Moving
+    //                    the Rectangle
     //
     // =======================================================
     public void moveHorizontally(double amount)
