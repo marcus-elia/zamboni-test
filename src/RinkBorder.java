@@ -115,4 +115,8 @@ public class RinkBorder
     {
         return this.bottomLeftWall;
     }
+    public double getThickness()
+    {
+        return this.thickness;
+    }
 }
