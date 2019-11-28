@@ -45,6 +45,8 @@ public class Zamboni
         this.angle = inputAngle;
         this.color = inputColor;
 
+        this.hitbox = new Rectangle(new Point(x,y), xWidth, yWidth, angle);
+
         this.maxSpeed = inputMaxSpeed;
         this.curSpeed = 0;
         this.vx = 0;
