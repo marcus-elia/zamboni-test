@@ -3,18 +3,11 @@ This code is from https://www.youtube.com/watch?v=1gir2R7G9ws
 It is a tutorial by RealTutsGML
  */
 
-
-
-import javax.imageio.ImageIO;
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Game extends Canvas implements Runnable
 {
@@ -24,11 +17,10 @@ public class Game extends Canvas implements Runnable
 
     private GameManager gameManager;
 
-    public Game() throws IOException
+    public Game()
     {
-
         gameManager = new GameManager(WIDTH, HEIGHT);
-        //this.addMouseListener(new MouseInput(gameManager));
+        this.addKeyListener(new KeyInput(gameManager));
         new Window(WIDTH, HEIGHT, "Zamboni", this);
 
     }
