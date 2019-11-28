@@ -76,6 +76,22 @@ public class Zamboni
         g2d.fill(path);
     }
 
+    public void setAngle(double inputAngle)
+    {
+        if(inputAngle < 0)
+        {
+            this.angle = inputAngle + 2*Math.PI;
+        }
+        else if(inputAngle >= 2*Math.PI)
+        {
+            this.angle = inputAngle - 2*Math.PI;
+        }
+        else
+        {
+            this.angle = inputAngle;
+        }
+    }
+
     // ===========================================
     //
     //            Movement Functions
@@ -122,6 +138,27 @@ public class Zamboni
         else
         {
             this.decreaseSpeed(this.acceleration / 6);
+        }
+    }
+
+    public void updateAngle()
+    {
+        // do not turn if stationary
+        if(this.curSpeed == 0)
+        {
+            return;
+        }
+        if(this.steeringRight && this.steeringLeft)
+        {
+            return;
+        }
+        else if(this.steeringRight)
+        {
+            this.setAngle(this.angle + this.deltaTheta);
+        }
+        else if(this.steeringLeft)
+        {
+            this.setAngle(this.angle - this.deltaTheta);
         }
     }
 }
