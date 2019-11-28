@@ -70,6 +70,7 @@ public class Zamboni
     public void tick()
     {
         this.updateSpeed();
+        this.turnWheels();
         this.updateAngle();
         this.setVelocityComponents();
         this.move();
@@ -226,23 +227,7 @@ public class Zamboni
 
     public void updateAngle()
     {
-        // do not turn if stationary
-        if(this.curSpeed == 0)
-        {
-            return;
-        }
-        if(this.steeringRight && this.steeringLeft)
-        {
-            return;
-        }
-        else if(this.steeringRight)
-        {
-            this.setAngle(this.angle + this.deltaTheta);
-        }
-        else if(this.steeringLeft)
-        {
-            this.setAngle(this.angle - this.deltaTheta);
-        }
+        this.setAngle(this.angle + this.curSpeed / this.maxSpeed * this.curWheelAngle / 10);
     }
 
     public void move()
