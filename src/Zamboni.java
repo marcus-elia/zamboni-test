@@ -75,6 +75,7 @@ public class Zamboni
         this.setVelocityComponents();
         this.move();
         this.updateHitbox();
+        this.correctNearBorders();
     }
 
     public void render(Graphics2D g2d)
@@ -134,6 +135,14 @@ public class Zamboni
         {
             this.angle = inputAngle;
         }
+    }
+    public void setX(double inputX)
+    {
+        this.x = inputX;
+    }
+    public void setY(double inputY)
+    {
+        this.y = inputY;
     }
 
     // ===========================================
@@ -230,10 +239,21 @@ public class Zamboni
         this.setAngle(this.angle + this.curSpeed / this.maxSpeed * this.curWheelAngle / 10);
     }
 
+    public void moveHorizontally(double amount)
+    {
+        this.setX(this.x + amount);
+        this.hitbox.moveHorizontally(amount);
+    }
+    public void moveVertically(double amount)
+    {
+        this.setY(this.y + amount);
+        this.hitbox.moveVertically(amount);
+    }
+
     public void move()
     {
-        this.x += this.vx;
-        this.y += this.vy;
+        this.moveHorizontally(vx);
+        this.moveVertically(vy);
     }
 
     // Update the hitbox when things have moved
@@ -242,5 +262,34 @@ public class Zamboni
         this.hitbox.setCenter(new Point(x,y));
         this.hitbox.setAngle(this.angle);
         this.hitbox.calculateCorners();
+    }
+
+    public void correctLeft()
+    {
+        double distanceFromEdge = this.hitbox.getLeftest() - this.border.getThickness();
+        if(distanceFromEdge < 0)
+        {
+            this.moveHorizontally(-distanceFromEdge);
+        }
+    }
+
+    public void correctNearBorders()
+    {
+        if(this.x < this.border.getThickness() + this.xWidth)
+        {
+            if(this.y < this.manager.getCornerRadius())
+            {
+                //this.correctTopLeft();
+            }
+            else if(this.y > this.manager.getWindowHeight() - this.manager.getCornerRadius())
+            {
+                //this.correctBottomLeft();
+            }
+            else
+            {
+                this.correctLeft();
+            }
+        }
+
     }
 }
