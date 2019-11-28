@@ -45,4 +45,12 @@ public class GameManager
     {
         return this.windowHeight/8;
     }
+    public double getWindowHeight()
+    {
+        return this.windowHeight;
+    }
+    public double getWindowWidth()
+    {
+        return this.windowWidth;
+    }
 }
