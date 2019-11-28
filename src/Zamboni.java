@@ -19,7 +19,11 @@ public class Zamboni
     private double vx;
     private double vy;
     private double acceleration;
+
+    // Turning
     private double deltaTheta;
+    private double curWheelAngle;
+    private double maxWheelAngle;
 
     // User input
     private boolean gasPedal;
@@ -34,7 +38,7 @@ public class Zamboni
 
     public Zamboni(GameManager manager, RinkBorder border, double inputX, double inputY, double inputXWidth,
                    double inputYWidth, double inputAngle, double inputMaxSpeed,
-                   double inputAcceleration, double inputDeltaTheta, Color inputColor)
+                   double inputAcceleration, double inputDeltaTheta, double inputMaxWheelAngle, Color inputColor)
     {
         this.manager = manager;
         this.border = border;
@@ -52,7 +56,10 @@ public class Zamboni
         this.vx = 0;
         this.vy = 0;
         this.acceleration = inputAcceleration;
+
         this.deltaTheta = inputDeltaTheta;
+        this.curWheelAngle = 0;
+        this.maxWheelAngle = inputMaxWheelAngle;
 
         this.gasPedal = false;
         this.brakePedal = false;
@@ -146,6 +153,29 @@ public class Zamboni
     {
         this.curSpeed = Math.max(this.curSpeed - amount, 0);
     }
+    // Turn the wheels right, but not beyond the limit
+    public void turnWheelsRight(double amount)
+    {
+        this.curWheelAngle = Math.min(this.curWheelAngle + amount, this.maxWheelAngle);
+    }
+    // Turn the wheels left, but not beyond the limit
+    public void turnWheelsLeft(double amount)
+    {
+        this.curWheelAngle = Math.max(this.curWheelAngle - amount, -this.maxWheelAngle);
+    }
+    // If the wheels are not straight and no user input is turning,
+    // start setting the wheels back to normal
+    public void resetWheels()
+    {
+        if(this.curWheelAngle < 0)
+        {
+            this.curWheelAngle = Math.min(0, this.curWheelAngle + this.deltaTheta);
+        }
+        else if(this.curWheelAngle > 0)
+        {
+            this.curWheelAngle = Math.max(0, this.curWheelAngle - this.deltaTheta);
+        }
+    }
 
     // Update the magnitude of the speed based on the gas pedal and brake pedal input
     public void updateSpeed()
@@ -169,6 +199,28 @@ public class Zamboni
         else
         {
             this.decreaseSpeed(this.acceleration / 6);
+        }
+    }
+
+
+    // Turn the angle of the wheels based on user input
+    public void turnWheels()
+    {
+        if(this.steeringLeft && this.steeringRight)
+        {
+            return;
+        }
+        else if(this.steeringRight)
+        {
+            this.turnWheelsRight(this.deltaTheta);
+        }
+        else if(this.steeringLeft)
+        {
+            this.turnWheelsLeft(this.deltaTheta);
+        }
+        else // Power steering
+        {
+            this.resetWheels();
         }
     }
 
