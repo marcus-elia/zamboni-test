@@ -60,7 +60,10 @@ public class Zamboni
 
     public void tick()
     {
-
+        this.updateSpeed();
+        this.updateAngle();
+        this.setVelocityComponents();
+        this.move();
     }
 
     public void render(Graphics2D g2d)
@@ -74,6 +77,36 @@ public class Zamboni
         path.lineTo(this.hitbox.getCorner1().x, this.hitbox.getCorner1().y);
         path.closePath();
         g2d.fill(path);
+    }
+
+
+    // ===================================
+    //
+    //              Setters
+    //
+    // ===================================
+    public void setBrakePedal(boolean input)
+    {
+        this.brakePedal = input;
+    }
+    public void setGasPedal(boolean input)
+    {
+        this.gasPedal = input;
+    }
+    public void setSteeringRight(boolean input)
+    {
+        this.steeringRight = input;
+    }
+    public void setSteeringLeft(boolean input)
+    {
+        this.steeringLeft = input;
+    }
+
+    // Update the velocity components to be consistent with the speed and angle
+    public void setVelocityComponents()
+    {
+        this.vx = this.curSpeed*Math.cos(this.angle);
+        this.vy = this.curSpeed*Math.sin(this.angle);
     }
 
     public void setAngle(double inputAngle)
@@ -98,12 +131,7 @@ public class Zamboni
     //
     // ===========================================
 
-    // Update the velocity components to be consistent with the speed and angle
-    public void setVelocityComponents()
-    {
-        this.vx = this.curSpeed*Math.cos(this.angle);
-        this.vy = this.curSpeed*Math.sin(this.angle);
-    }
+
 
     // Increase the speed by the amount input, or set it to maxSpeed, whichever is smaller
     public void increaseSpeed(double amount)
@@ -160,5 +188,11 @@ public class Zamboni
         {
             this.setAngle(this.angle - this.deltaTheta);
         }
+    }
+
+    public void move()
+    {
+        this.x += this.vx;
+        this.y += this.vy;
     }
 }
