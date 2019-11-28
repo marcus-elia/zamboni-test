@@ -66,6 +66,7 @@ public class Zamboni
         this.updateAngle();
         this.setVelocityComponents();
         this.move();
+        this.updateHitbox();
     }
 
     public void render(Graphics2D g2d)
@@ -196,5 +197,12 @@ public class Zamboni
     {
         this.x += this.vx;
         this.y += this.vy;
+    }
+
+    // Update the hitbox when things have moved
+    public void updateHitbox()
+    {
+        this.hitbox.setCenter(new Point(x,y));
+        this.hitbox.setAngle(this.angle);
     }
 }
