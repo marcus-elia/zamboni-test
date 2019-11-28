@@ -15,7 +15,8 @@ public class GameManager
         this.border = new RinkBorder(this, this.windowWidth, this.windowHeight, 4);
 
         this.zamboni = new Zamboni(this, this.border, 4 + 20, windowHeight/2,
-                60, 40, 3*Math.PI/2, 5, .2, .05, Color.white);
+                60, 40, 3*Math.PI/2, 3, .2, .05,
+                Math.PI/6, Color.white);
     }
 
     public void tick()
