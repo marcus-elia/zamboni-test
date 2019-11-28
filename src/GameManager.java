@@ -29,4 +29,15 @@ public class GameManager
         this.border.render(g2d);
         this.zamboni.render(g2d);
     }
+
+
+    // ===================================
+    //
+    //              Getters
+    //
+    // ===================================
+    public Zamboni getZamboni()
+    {
+        return this.zamboni;
+    }
 }
