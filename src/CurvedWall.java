@@ -35,11 +35,24 @@ public class CurvedWall extends Wall
         double signOfSin = Math.abs(Math.sin(middleAngle)) / Math.sin(middleAngle);
         double c = 0.551915024494; // from spencermortensen.com
 
-        this.innerBezier1 = new Point(center.x + innerRadius*c*signOfCos, center.y + innerRadius*signOfSin);
-        this.innerBezier2 = new Point(center.x + innerRadius*signOfCos, center.y + innerRadius*c*signOfSin);
+        // Different cases for Quadrants I and III versus II and IV
+        if(middleAngle > 3*Math.PI/2 || (middleAngle > Math.PI/2 && middleAngle < Math.PI))
+        {
+            this.innerBezier1 = new Point(center.x + innerRadius*c*signOfCos, center.y + innerRadius*signOfSin);
+            this.innerBezier2 = new Point(center.x + innerRadius*signOfCos, center.y + innerRadius*c*signOfSin);
 
-        this.outerBezier1 = new Point(center.x + outerRadius*c*signOfCos, center.y + outerRadius*signOfSin);
-        this.outerBezier2 = new Point(center.x + outerRadius*signOfCos, center.y + outerRadius*c*signOfSin);
+            this.outerBezier1 = new Point(center.x + outerRadius*c*signOfCos, center.y + outerRadius*signOfSin);
+            this.outerBezier2 = new Point(center.x + outerRadius*signOfCos, center.y + outerRadius*c*signOfSin);
+        }
+        else
+        {
+            this.innerBezier1 = new Point(center.x + innerRadius*signOfCos, center.y + innerRadius*c*signOfSin);
+            this.innerBezier2 = new Point(center.x + innerRadius*c*signOfCos, center.y + innerRadius*signOfSin);
+
+            this.outerBezier1 = new Point(center.x + outerRadius*signOfCos, center.y + outerRadius*c*signOfSin);
+            this.outerBezier2 = new Point(center.x + outerRadius*c*signOfCos, center.y + outerRadius*signOfSin);
+        }
+
 
         this.p1 = new Point(center.x + innerRadius*Math.cos(startAngle), center.y + innerRadius*Math.sin(startAngle));
         this.p2 = new Point(center.x + outerRadius*Math.cos(startAngle), center.y + outerRadius*Math.sin(startAngle));
