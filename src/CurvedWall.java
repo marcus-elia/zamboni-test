@@ -81,4 +81,12 @@ public class CurvedWall extends Wall
     {
         return this.center;
     }
+    public double getInnerRadius()
+    {
+        return this.innerRadius;
+    }
+    public double getOuterRadius()
+    {
+        return this.outerRadius;
+    }
 }
