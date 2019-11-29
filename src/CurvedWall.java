@@ -71,4 +71,14 @@ public class CurvedWall extends Wall
         }
         return false;
     }
+
+    // ================================
+    //
+    //            Getters
+    //
+    // ================================
+    public Point getCenter()
+    {
+        return this.center;
+    }
 }
