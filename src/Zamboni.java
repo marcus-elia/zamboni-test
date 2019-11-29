@@ -273,13 +273,61 @@ public class Zamboni
         }
     }
 
+    public void correctTop()
+    {
+        double distanceFromEdge = this.hitbox.getHighest() - this.border.getThickness();
+        if(distanceFromEdge < 0)
+        {
+            this.moveVertically(-distanceFromEdge);
+        }
+    }
+
+    public void correctTopLeft()
+    {
+        Point center = this.border.getTopLeftWall().getCenter();
+        double radius = this.border.getTopLeftWall().getInnerRadius();
+        double distanceFromEdge;
+
+        distanceFromEdge = radius - center.distanceToOtherPoint(this.hitbox.getCorner1());
+        if(distanceFromEdge < 0)
+        {
+            double theta = center.angleToPoint(this.hitbox.getCorner1());
+            this.moveHorizontally(distanceFromEdge*Math.cos(theta + Math.PI));
+            this.moveVertically(distanceFromEdge*Math.sin(theta + Math.PI));
+        }
+
+        distanceFromEdge = radius - center.distanceToOtherPoint(this.hitbox.getCorner2());
+        if(distanceFromEdge < 0)
+        {
+            double theta = center.angleToPoint(this.hitbox.getCorner2());
+            this.moveHorizontally(distanceFromEdge*Math.cos(theta + Math.PI));
+            this.moveVertically(distanceFromEdge*Math.sin(theta + Math.PI));
+        }
+
+        distanceFromEdge = radius - center.distanceToOtherPoint(this.hitbox.getCorner3());
+        if(distanceFromEdge < 0)
+        {
+            double theta = center.angleToPoint(this.hitbox.getCorner3());
+            this.moveHorizontally(distanceFromEdge*Math.cos(theta + Math.PI));
+            this.moveVertically(distanceFromEdge*Math.sin(theta + Math.PI));
+        }
+
+        distanceFromEdge = radius - center.distanceToOtherPoint(this.hitbox.getCorner4());
+        if(distanceFromEdge < 0)
+        {
+            double theta = center.angleToPoint(this.hitbox.getCorner4());
+            this.moveHorizontally(distanceFromEdge*Math.cos(theta + Math.PI));
+            this.moveVertically(distanceFromEdge*Math.sin(theta + Math.PI));
+        }
+    }
+
     public void correctNearBorders()
     {
         if(this.x < this.border.getThickness() + this.xWidth)
         {
             if(this.y < this.manager.getCornerRadius())
             {
-                //this.correctTopLeft();
+                this.correctTopLeft();
             }
             else if(this.y > this.manager.getWindowHeight() - this.manager.getCornerRadius())
             {
@@ -289,6 +337,11 @@ public class Zamboni
             {
                 this.correctLeft();
             }
+        }
+
+        if(this.y < this.border.getThickness() + this.xWidth)
+        {
+            this.correctTop();
         }
 
     }
