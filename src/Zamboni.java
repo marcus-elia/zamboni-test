@@ -282,10 +282,27 @@ public class Zamboni
         }
     }
 
-    public void correctTopLeft()
+    public void correctRight()
     {
-        Point center = this.border.getTopLeftWall().getCenter();
-        double radius = this.border.getTopLeftWall().getInnerRadius();
+        double distanceFromEdge = this.hitbox.getRightest() - (this.manager.getWindowWidth() - this.border.getThickness());
+        if(distanceFromEdge > 0)
+        {
+            this.moveHorizontally(-distanceFromEdge);
+        }
+    }
+
+    public void correctBottom()
+    {
+        double distanceFromEdge = this.hitbox.getLowest() - (this.manager.getWindowHeight() - this.border.getThickness());
+        if(distanceFromEdge > 0)
+        {
+            this.moveVertically(-distanceFromEdge);
+        }
+    }
+
+    // A helper function used in each of the four corners
+    public void correctCorner(Point center, double radius)
+    {
         double distanceFromEdge;
 
         distanceFromEdge = radius - center.distanceToOtherPoint(this.hitbox.getCorner1());
@@ -321,6 +338,34 @@ public class Zamboni
         }
     }
 
+    public void correctTopLeft()
+    {
+        Point center = this.border.getTopLeftWall().getCenter();
+        double radius = this.border.getTopLeftWall().getInnerRadius();
+        this.correctCorner(center, radius);
+    }
+
+    public void correctBottomLeft()
+    {
+        Point center = this.border.getBottomLeftWall().getCenter();
+        double radius = this.border.getBottomLeftWall().getInnerRadius();
+        this.correctCorner(center, radius);
+    }
+
+    public void correctTopRight()
+    {
+        Point center = this.border.getTopRightWall().getCenter();
+        double radius = this.border.getTopRightWall().getInnerRadius();
+        this.correctCorner(center, radius);
+    }
+
+    public void correctBottomRight()
+    {
+        Point center = this.border.getBottomRightWall().getCenter();
+        double radius = this.border.getBottomRightWall().getInnerRadius();
+        this.correctCorner(center, radius);
+    }
+
     public void correctNearBorders()
     {
         if(this.x < this.border.getThickness() + this.xWidth)
@@ -331,18 +376,37 @@ public class Zamboni
             }
             else if(this.y > this.manager.getWindowHeight() - this.manager.getCornerRadius())
             {
-                //this.correctBottomLeft();
+                this.correctBottomLeft();
             }
             else
             {
                 this.correctLeft();
             }
         }
-
+        else if(this.x > this.manager.getWindowWidth() - this.border.getThickness() - this.xWidth)
+        {
+            if(this.y < this.manager.getCornerRadius())
+            {
+                this.correctTopRight();
+            }
+            else if(this.y > this.manager.getWindowHeight() - this.manager.getCornerRadius())
+            {
+                this.correctBottomRight();
+            }
+            else
+            {
+                this.correctRight();
+            }
+        }
         else if(this.y < this.border.getThickness() + this.xWidth)
         {
             this.correctTop();
         }
+        else if(this.y > this.manager.getWindowHeight() - this.border.getThickness() - this.xWidth)
+        {
+            this.correctBottom();
+        }
+
 
     }
 }
