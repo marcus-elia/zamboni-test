@@ -108,4 +108,14 @@ public class CurvedWall extends Wall
     {
         return this.outerRadius;
     }
+    public double getSignOfCosine()
+    {
+        double middleAngle = (startAngle + endAngle) / 2;
+        return Math.abs(Math.cos(middleAngle)) / Math.cos(middleAngle);
+    }
+    public double getSignOfSine()
+    {
+        double middleAngle = (startAngle + endAngle) / 2;
+        return Math.abs(Math.sin(middleAngle)) / Math.sin(middleAngle);
+    }
 }
