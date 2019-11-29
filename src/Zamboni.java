@@ -339,7 +339,7 @@ public class Zamboni
             }
         }
 
-        if(this.y < this.border.getThickness() + this.xWidth)
+        else if(this.y < this.border.getThickness() + this.xWidth)
         {
             this.correctTop();
         }
