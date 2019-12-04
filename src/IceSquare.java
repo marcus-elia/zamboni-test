@@ -16,7 +16,7 @@ public class IceSquare
         this.topLeft = new Point(x,y);
         this.size = inputSize;
         this.iceColor = inputIceColor;
-        this.renderColor = new Color(iceColor.getRed(), iceColor.getGreen(), iceColor.getBlue(), 0.5f);
+        this.renderColor = new Color(iceColor.getRed()/255.0f, iceColor.getGreen()/255.0f, iceColor.getBlue()/255.0f, 0.5f);
     }
 
     public void render(Graphics2D g2d)
@@ -42,6 +42,6 @@ public class IceSquare
     // Set the alpha to 1
     public void getZambonied()
     {
-        this.renderColor = new Color(iceColor.getRed(), iceColor.getGreen(), iceColor.getBlue(), 1f);
+        this.renderColor = new Color(iceColor.getRed()/255.0f, iceColor.getGreen()/255.0f, iceColor.getBlue()/255.0f, 1f);
     }
 }
