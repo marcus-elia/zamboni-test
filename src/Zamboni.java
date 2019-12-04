@@ -301,7 +301,7 @@ public class Zamboni
     }
 
     // A helper function used in each of the four corners
-    public void correctCorner(Point center, double radius, double signOfCos, double signOfSine)
+    public void correctCorner(Point center, double radius)
     {
         double distanceFromEdge;
 
@@ -309,32 +309,32 @@ public class Zamboni
         if(distanceFromEdge < 0)
         {
             double theta = center.angleToPoint(this.hitbox.getCorner1());
-            this.moveHorizontally(distanceFromEdge*Math.cos(theta)*signOfCos);
-            this.moveVertically(distanceFromEdge*Math.sin(theta)*signOfSine);
+            this.moveHorizontally(distanceFromEdge*Math.cos(theta));
+            this.moveVertically(distanceFromEdge*Math.sin(theta));
         }
 
         distanceFromEdge = radius - center.distanceToOtherPoint(this.hitbox.getCorner2());
         if(distanceFromEdge < 0)
         {
             double theta = center.angleToPoint(this.hitbox.getCorner2());
-            this.moveHorizontally(distanceFromEdge*Math.cos(theta)*signOfCos);
-            this.moveVertically(distanceFromEdge*Math.sin(theta)*signOfSine);
+            this.moveHorizontally(distanceFromEdge*Math.cos(theta));
+            this.moveVertically(distanceFromEdge*Math.sin(theta));
         }
 
         distanceFromEdge = radius - center.distanceToOtherPoint(this.hitbox.getCorner3());
         if(distanceFromEdge < 0)
         {
             double theta = center.angleToPoint(this.hitbox.getCorner3());
-            this.moveHorizontally(distanceFromEdge*Math.cos(theta)*signOfCos);
-            this.moveVertically(distanceFromEdge*Math.sin(theta)*signOfSine);
+            this.moveHorizontally(distanceFromEdge*Math.cos(theta));
+            this.moveVertically(distanceFromEdge*Math.sin(theta));
         }
 
         distanceFromEdge = radius - center.distanceToOtherPoint(this.hitbox.getCorner4());
         if(distanceFromEdge < 0)
         {
             double theta = center.angleToPoint(this.hitbox.getCorner4());
-            this.moveHorizontally(distanceFromEdge*Math.cos(theta)*signOfCos);
-            this.moveVertically(distanceFromEdge*Math.sin(theta)*signOfSine);
+            this.moveHorizontally(distanceFromEdge*Math.cos(theta));
+            this.moveVertically(distanceFromEdge*Math.sin(theta));
         }
     }
 
@@ -342,36 +342,28 @@ public class Zamboni
     {
         Point center = this.border.getTopLeftWall().getCenter();
         double radius = this.border.getTopLeftWall().getInnerRadius();
-        double signOfCos = this.border.getTopLeftWall().getSignOfCosine();
-        double signOfSine = this.border.getTopLeftWall().getSignOfSine();
-        this.correctCorner(center, radius, signOfCos, signOfSine);
+        this.correctCorner(center, radius);
     }
 
     public void correctBottomLeft()
     {
         Point center = this.border.getBottomLeftWall().getCenter();
         double radius = this.border.getBottomLeftWall().getInnerRadius();
-        double signOfCos = this.border.getBottomLeftWall().getSignOfCosine();
-        double signOfSine = this.border.getBottomLeftWall().getSignOfSine();
-        this.correctCorner(center, radius, signOfCos, signOfSine);
+        this.correctCorner(center, radius);
     }
 
     public void correctTopRight()
     {
         Point center = this.border.getTopRightWall().getCenter();
         double radius = this.border.getTopRightWall().getInnerRadius();
-        double signOfCos = this.border.getTopRightWall().getSignOfCosine();
-        double signOfSine = this.border.getTopRightWall().getSignOfSine();
-        this.correctCorner(center, radius, signOfCos, signOfSine);
+        this.correctCorner(center, radius);
     }
 
     public void correctBottomRight()
     {
         Point center = this.border.getBottomRightWall().getCenter();
         double radius = this.border.getBottomRightWall().getInnerRadius();
-        double signOfCos = this.border.getBottomRightWall().getSignOfCosine();
-        double signOfSine = this.border.getBottomRightWall().getSignOfSine();
-        this.correctCorner(center, radius, signOfCos, signOfSine);
+        this.correctCorner(center, radius);
     }
 
     public void correctNearBorders()
