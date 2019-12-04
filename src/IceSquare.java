@@ -7,6 +7,7 @@ public class IceSquare
     private Point topLeft;
     private int size;
     private Color iceColor; // The RBG color of this square
+    private Rectangle2D rect;
 
     // The RGB color with alpha
     private Color renderColor;
@@ -17,13 +18,13 @@ public class IceSquare
         this.size = inputSize;
         this.iceColor = inputIceColor;
         this.renderColor = new Color(iceColor.getRed()/255.0f, iceColor.getGreen()/255.0f, iceColor.getBlue()/255.0f, 0.5f);
+        this.rect = new Rectangle2D.Double(topLeft.x, topLeft.y, size, size);
     }
 
     public void render(Graphics2D g2d)
     {
         g2d.setColor(this.renderColor);
-        Rectangle2D rect = new Rectangle2D.Double(topLeft.x, topLeft.y, size, size);
-        g2d.fill(rect);
+        g2d.fill(this.rect);
     }
 
 
