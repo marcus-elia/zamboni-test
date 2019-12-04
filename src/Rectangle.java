@@ -198,7 +198,7 @@ public class Rectangle
     {
         Point rotatedP = this.center.rotateAroundThis(p, -this.angle);
         return rotatedP.x > center.x - xWidth/2 && rotatedP.x < center.x + xWidth/2 &&
-                rotatedP.y > center.y - yWidth/2 && rotatedP.y < center.y - yWidth/2;
+                rotatedP.y > center.y - yWidth/2 && rotatedP.y < center.y + yWidth/2;
     }
 
     public boolean isInside(IceSquare isq)
