@@ -58,7 +58,7 @@ public class IceSurface
 
     }
 
-    public void render(Graphics2D g2d, Point renderCenter, double renderRadius)
+    public void render(Graphics2D g2d, Point renderTopLeft, int renderRectXSize, int renderRectYSize)
     {
         /*for(int i = 0; i < numCols; i++)
         {
@@ -67,10 +67,11 @@ public class IceSurface
                 this.squares[i][j].render(g2d);
             }
         }*/
-        int numSquares = (int)renderRadius/squareSize;
-        for(int i = Math.max((int)renderCenter.x - numSquares, 0); i < Math.min((int)renderCenter.x + numSquares, numCols); i++)
+        int numSquaresX = renderRectXSize/squareSize;
+        int numSquaresY = renderRectYSize/squareSize;
+        for(int i = Math.max((int)renderTopLeft.x, 0); i < Math.min((int)renderTopLeft.x + numSquaresX, numCols); i++)
         {
-            for(int j = Math.max((int)renderCenter.y - numSquares,0); j < Math.min((int)renderCenter.y + numSquares, numRows); j++)
+            for(int j = Math.max((int)renderTopLeft.y - numSquaresY, 0); j < Math.min((int)renderTopLeft.y + numSquaresY, numRows); j++)
             {
                 this.squares[i][j].render(g2d);
             }
