@@ -100,6 +100,14 @@ public class Zamboni
     {
         return this.hitbox;
     }
+    public double getXWidth()
+    {
+        return this.xWidth;
+    }
+    public double getYWidth()
+    {
+        return this.yWidth;
+    }
 
     // ===================================
     //
