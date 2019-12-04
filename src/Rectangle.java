@@ -12,6 +12,9 @@ public class Rectangle
     private Point corner3;
     private Point corner4;
 
+    // Used for calculating zamboniing
+    private Point bottomCenter;
+
 
     public Rectangle(Point inputCenter, double inputXWidth, double inputYWidth, double inputAngle)
     {
@@ -20,6 +23,7 @@ public class Rectangle
         this.yWidth = inputYWidth;
         this.angle = inputAngle;
         this.calculateCorners();
+        this.calculateBottomCenter();
     }
 
     // Getters
@@ -54,6 +58,10 @@ public class Rectangle
     public Point getCorner4()
     {
         return this.corner4;
+    }
+    public Point getBottomCenter()
+    {
+        return this.bottomCenter;
     }
 
     // Setters
@@ -156,6 +164,12 @@ public class Rectangle
     {
         return max4(corner1.y, corner2.y, corner3.y, corner4.y);
     }
+
+
+     public void calculateBottomCenter()
+     {
+         this.bottomCenter = new Point((this.corner2.x + this.corner3.x)/2, (this.corner2.y + this.corner3.y)/2);
+     }
 
     // =======================================================
     //
