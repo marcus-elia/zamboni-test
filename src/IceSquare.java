@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
 
 public class IceSquare
 {
@@ -16,6 +18,17 @@ public class IceSquare
         this.iceColor = inputIceColor;
         this.renderColor = new Color(iceColor.getRed(), iceColor.getGreen(), iceColor.getBlue(), 0.5f);
     }
+
+    public void render(Graphics2D g2d)
+    {
+        g2d.setColor(this.renderColor);
+        Rectangle2D rect = new Rectangle2D.Double(topLeft.x, topLeft.y, size, size);
+        g2d.fill(rect);
+    }
+
+
+
+
 
     public Point getTopLeft()
     {
