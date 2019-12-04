@@ -91,6 +91,15 @@ public class Zamboni
         g2d.fill(path);
     }
 
+    // ===================================
+    //
+    //             Getters
+    //
+    // ===================================
+    public Rectangle getHitbox()
+    {
+        return this.hitbox;
+    }
 
     // ===================================
     //
