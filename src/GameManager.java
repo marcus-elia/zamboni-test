@@ -28,10 +28,12 @@ public class GameManager
                 60, 40, 3*Math.PI/2, 1, .1, .008,
                 Math.PI/10, new Color(20, 40, 100));
 
-        this.renderRadius = Math.sqrt(zamboni.getXWidth()*zamboni.getXWidth()/4 + zamboni.getYWidth()*zamboni.getYWidth()/4);
 
-        this.squareSize = 10;
+        this.squareSize = 4;
         this.surface = new IceSurface(this.squareSize, this.windowWidth, this.windowHeight);
+
+        this.renderRadius = Math.sqrt(zamboni.getXWidth()*zamboni.getXWidth()/4 + zamboni.getYWidth()*zamboni.getYWidth()/4)
+                               + this.squareSize;
     }
 
     public void tick()
