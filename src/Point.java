@@ -34,12 +34,6 @@ public class Point
     {
         double tanInv = Math.atan2(otherPoint.y - y, otherPoint.x - x);
 
-        // Since atan has a restricted range, get the things in quandrants II and III
-        if(otherPoint.x - x < 0)
-        {
-            tanInv += Math.PI;
-        }
-
         // Ensure the output is between 0 and 2pi
         if(tanInv >= 2*Math.PI)
         {
