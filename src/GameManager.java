@@ -45,6 +45,8 @@ public class GameManager
     {
         if(this.numFrames == 0)
         {
+            g2d.setColor(Color.gray);
+            g2d.fillRect(0,0, this.windowWidth, this.windowHeight);
             this.surface.renderEverything(g2d);
         }
         this.surface.render(g2d, this.getTopLeftRenderCorner(), this.getRenderRectXSize(), this.getRenderRectYSize());
