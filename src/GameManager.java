@@ -16,8 +16,8 @@ public class GameManager
         this.border = new RinkBorder(this, this.windowWidth, this.windowHeight, 4);
 
         this.zamboni = new Zamboni(this, this.border, 4 + 20, windowHeight/2,
-                60, 40, 3*Math.PI/2, 1, .1, .025,
-                Math.PI/6, new Color(20, 40, 100));
+                60, 40, 3*Math.PI/2, 1, .1, .005,
+                Math.PI/8, new Color(20, 40, 100));
 
         this.surface = new IceSurface(4, this.windowWidth, this.windowHeight);
     }
