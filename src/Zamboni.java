@@ -188,11 +188,11 @@ public class Zamboni
     {
         if(this.curWheelAngle < 0)
         {
-            this.curWheelAngle = Math.min(0, this.curWheelAngle + this.deltaTheta);
+            this.curWheelAngle = Math.min(0, this.curWheelAngle + 5*this.deltaTheta);
         }
         else if(this.curWheelAngle > 0)
         {
-            this.curWheelAngle = Math.max(0, this.curWheelAngle - this.deltaTheta);
+            this.curWheelAngle = Math.max(0, this.curWheelAngle - 5*this.deltaTheta);
         }
     }
 
