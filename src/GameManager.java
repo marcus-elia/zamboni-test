@@ -36,7 +36,6 @@ public class GameManager
 
     public void tick()
     {
-        this.numFrames++;
         this.border.tick();
         this.zamboni.tick();
         this.surface.updateSquares(this.zamboni.getHitbox());
@@ -44,13 +43,15 @@ public class GameManager
 
     public void render(Graphics2D g2d)
     {
-        if(this.numFrames == 1)
+        if(this.numFrames == 0)
         {
             this.surface.renderEverything(g2d);
         }
         this.surface.render(g2d, this.getTopLeftRenderCorner(), this.getRenderRectXSize(), this.getRenderRectYSize());
         this.border.render(g2d);
         this.zamboni.render(g2d);
+
+        this.numFrames++;
     }
 
 
