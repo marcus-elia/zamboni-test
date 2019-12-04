@@ -36,7 +36,7 @@ public class GameManager
 
     public void render(Graphics2D g2d)
     {
-        this.surface.render(g2d);
+        this.surface.render(g2d, this.getRenderCenter(), this.renderRadius);
         this.border.render(g2d);
         this.zamboni.render(g2d);
     }
