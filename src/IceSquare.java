@@ -21,6 +21,10 @@ public class IceSquare
     {
         return this.topLeft;
     }
+    public Point getBottomRight()
+    {
+        return new Point(this.topLeft.x + this.size, this.topLeft.y + this.size);
+    }
 
     // Set the alpha to 1
     public void getZambonied()
