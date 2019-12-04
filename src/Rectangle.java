@@ -217,7 +217,7 @@ public class Rectangle
 
     public boolean isInside(IceSquare isq)
     {
-        return isInside(isq.getTopLeft()) || isInside(isq.getBottomRight());
+        return isInside(isq.getCenter());
     }
 
 }
