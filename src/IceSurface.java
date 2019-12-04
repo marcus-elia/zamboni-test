@@ -76,8 +76,9 @@ public class IceSurface
         {
             for(int j = 0; j < numRows; j++)
             {
-                //if (r.isInside(squares[i][j]))
-                if(r.getCenter().distanceToOtherPoint(squares[i][j].getTopLeft()) < r.getYWidth()/2 + squareSize)
+
+                if(r.getCenter().distanceToOtherPoint(squares[i][j].getTopLeft()) < r.getXWidth()/2 + squareSize &&
+                   r.isInside(squares[i][j]))
                 {
                     squares[i][j].getZambonied();
                 }
