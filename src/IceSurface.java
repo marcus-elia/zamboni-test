@@ -69,9 +69,9 @@ public class IceSurface
         }*/
         int numSquaresX = renderRectXSize/squareSize;
         int numSquaresY = renderRectYSize/squareSize;
-        for(int i = Math.max((int)renderTopLeft.x, 0); i < Math.min((int)renderTopLeft.x + numSquaresX, numCols); i++)
+        for(int i = Math.max((int)renderTopLeft.x/squareSize, 0); i < Math.min((int)renderTopLeft.x/squareSize + numSquaresX, numCols); i++)
         {
-            for(int j = Math.max((int)renderTopLeft.y - numSquaresY, 0); j < Math.min((int)renderTopLeft.y + numSquaresY, numRows); j++)
+            for(int j = Math.max((int)renderTopLeft.y/squareSize - numSquaresY, 0); j < Math.min((int)renderTopLeft.y/squareSize + numSquaresY, numRows); j++)
             {
                 this.squares[i][j].render(g2d);
             }
