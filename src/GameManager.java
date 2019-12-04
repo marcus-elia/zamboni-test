@@ -6,6 +6,8 @@ public class GameManager
     private int windowHeight;
     private RinkBorder border;
     private Zamboni zamboni;
+
+    private int squareSize;
     private IceSurface surface;
 
     // How far from the zamboni needs to be redrawn each frame
@@ -24,7 +26,8 @@ public class GameManager
 
         this.renderRadius = Math.sqrt(zamboni.getXWidth()*zamboni.getXWidth()/4 + zamboni.getYWidth()*zamboni.getYWidth()/4);
 
-        this.surface = new IceSurface(10, this.windowWidth, this.windowHeight);
+        this.squareSize = 10;
+        this.surface = new IceSurface(this.squareSize, this.windowWidth, this.windowHeight);
     }
 
     public void tick()
@@ -36,7 +39,7 @@ public class GameManager
 
     public void render(Graphics2D g2d)
     {
-        this.surface.render(g2d, this.getRenderCenter(), this.renderRadius);
+        this.surface.render(g2d, this.getTopLeftRenderCorner(), this.getRenderRectXSize(), this.getRenderRectYSize());
         this.border.render(g2d);
         this.zamboni.render(g2d);
     }
@@ -71,5 +74,44 @@ public class GameManager
     public Point getRenderCenter()
     {
         return this.zamboni.getHitbox().getCenter();
+    }
+
+    // =======================================
+    //
+    //            Functions for
+    //               Rendering
+    //
+    // =======================================
+
+    // Returns the closest point to (x,y) whose coordinates are both
+    // multiples of modulus and less than or equal to the corresponding
+    // coordinate
+    public Point getUpLeftMultiple(double x, double y, int modulus)
+    {
+        return new Point(((int)x / modulus) * modulus, ((int)y / modulus) * modulus);
+    }
+    public Point getDownRightMultiple(double x, double y, int modulus)
+    {
+        return new Point(((int)Math.ceil(x) / modulus) * modulus, ((int)Math.ceil(y) / modulus) * modulus);
+    }
+
+    public Point getTopLeftRenderCorner()
+    {
+        return this.getUpLeftMultiple(this.zamboni.getHitbox().getCenter().x - this.renderRadius,
+                this.zamboni.getHitbox().getCenter().y - this.renderRadius, this.squareSize);
+    }
+    public Point getBottomRightRenderCorner()
+    {
+        return this.getDownRightMultiple(this.zamboni.getHitbox().getCenter().x + this.renderRadius,
+                this.zamboni.getHitbox().getCenter().y + this.renderRadius, this.squareSize);
+    }
+
+    public int getRenderRectXSize()
+    {
+        return (int)this.getBottomRightRenderCorner().x - (int)this.getTopLeftRenderCorner().x;
+    }
+    public int getRenderRectYSize()
+    {
+        return (int)this.getBottomRightRenderCorner().y - (int)this.getTopLeftRenderCorner().y;
     }
 }
