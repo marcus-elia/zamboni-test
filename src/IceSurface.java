@@ -60,7 +60,6 @@ public class IceSurface
 
     public void render(Graphics2D g2d, Point renderTopLeft, int renderRectXSize, int renderRectYSize)
     {
-
         int numSquaresX = renderRectXSize/squareSize;
         int numSquaresY = renderRectYSize/squareSize;
         for(int i = Math.max((int)renderTopLeft.x/squareSize, 0); i < Math.min((int)renderTopLeft.x/squareSize + numSquaresX, numCols); i++)
@@ -85,15 +84,15 @@ public class IceSurface
     }
 
 
-    public void updateSquares(Rectangle r)
+    public void updateSquares(Rectangle r, Point renderTopLeft, int renderRectXSize, int renderRectYSize)
     {
-        for(int i = 0; i < numCols; i++)
+        int numSquaresX = renderRectXSize/squareSize;
+        int numSquaresY = renderRectYSize/squareSize;
+        for(int i = Math.max((int)renderTopLeft.x/squareSize, 0); i < Math.min((int)renderTopLeft.x/squareSize + numSquaresX, numCols); i++)
         {
-            for(int j = 0; j < numRows; j++)
+            for(int j = Math.max((int)renderTopLeft.y/squareSize, 0); j < Math.min((int)renderTopLeft.y/squareSize + numSquaresY, numRows); j++)
             {
-
-                if(r.getCenter().distanceToOtherPoint(squares[i][j].getTopLeft()) < r.getXWidth()/2 + squareSize &&
-                   r.isInside(squares[i][j]))
+                if(r.isInside(squares[i][j]))
                 {
                     squares[i][j].getZambonied();
                 }
