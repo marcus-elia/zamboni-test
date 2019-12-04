@@ -16,7 +16,7 @@ public class GameManager
 
         this.zamboni = new Zamboni(this, this.border, 4 + 20, windowHeight/2,
                 60, 40, 3*Math.PI/2, 3, .2, .05,
-                Math.PI/6, Color.white);
+                Math.PI/6, new Color(20, 40, 100));
     }
 
     public void tick()
