@@ -58,11 +58,19 @@ public class IceSurface
 
     }
 
-    public void render(Graphics2D g2d)
+    public void render(Graphics2D g2d, Point renderCenter, double renderRadius)
     {
-        for(int i = 0; i < numCols; i++)
+        /*for(int i = 0; i < numCols; i++)
         {
             for(int j = 0; j < numRows; j++)
+            {
+                this.squares[i][j].render(g2d);
+            }
+        }*/
+        int numSquares = (int)renderRadius/squareSize;
+        for(int i = Math.max((int)renderCenter.x - numSquares, 0); i < Math.min((int)renderCenter.x + numSquares, numCols); i++)
+        {
+            for(int j = Math.max((int)renderCenter.y - numSquares,0); j < Math.min((int)renderCenter.y + numSquares, numRows); j++)
             {
                 this.squares[i][j].render(g2d);
             }
