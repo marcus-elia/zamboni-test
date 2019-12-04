@@ -24,10 +24,32 @@ public class IceSurface
     // Helper function for constructor. Fills the array with white squares
     public void initializeSquares()
     {
+        Color curColor;
         for(int i = 0; i < numCols; i++)
         {
             for(int j = 0; j < numRows; j++)
-                this.squares[i][j] = new IceSquare(i * squareSize, j * squareSize, squareSize, Color.white);
+            {
+                // Goal lines
+                if(j == numRows / 16 || j == 15*numRows/16)
+                {
+                    curColor = Color.red;
+                }
+                // Blue lines
+                else if(j == numRows/3 || j == numRows/3 + 1 || j == 2*numRows/3 || j == 2*numRows/3 - 1)
+                {
+                    curColor = Color.blue;
+                }
+                // Center line
+                else if(j == numRows/2)
+                {
+                    curColor = Color.red;
+                }
+                else
+                {
+                    curColor = Color.white;
+                }
+                this.squares[i][j] = new IceSquare(i * squareSize, j * squareSize, squareSize, curColor);
+            }
         }
     }
 
