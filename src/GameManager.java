@@ -24,9 +24,9 @@ public class GameManager
 
         this.border = new RinkBorder(this, this.windowWidth, this.windowHeight, 4);
 
-        this.zamboni = new Zamboni(this, this.border, 4 + 20, windowHeight/2,
-                60, 40, 3*Math.PI/2, 1, .1, .008,
-                Math.PI/10, new Color(20, 40, 100));
+        this.zamboni = new Zamboni(this, this.border, 4 + 10, windowHeight/2,
+                36, 20, 3*Math.PI/2, .6, .1, .008,
+                Math.PI/16, new Color(20, 40, 100));
 
 
         this.squareSize = 4;
@@ -40,7 +40,8 @@ public class GameManager
     {
         this.border.tick();
         this.zamboni.tick();
-        this.surface.updateSquares(this.zamboni.getHitbox());
+        this.surface.updateSquares(this.zamboni.getHitbox(), this.getTopLeftRenderCorner(),
+                this.getRenderRectXSize(), this.getRenderRectYSize());
     }
 
     public void render(Graphics2D g2d)
