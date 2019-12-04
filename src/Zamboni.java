@@ -279,6 +279,7 @@ public class Zamboni
         this.hitbox.setCenter(new Point(x,y));
         this.hitbox.setAngle(this.angle);
         this.hitbox.calculateCorners();
+        this.hitbox.calculateBottomCenter();
     }
 
     public void correctLeft()
