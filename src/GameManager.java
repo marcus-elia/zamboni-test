@@ -8,6 +8,9 @@ public class GameManager
     private Zamboni zamboni;
     private IceSurface surface;
 
+    // How far from the zamboni needs to be redrawn each frame
+    private double renderRadius;
+
     public GameManager(int width, int height)
     {
         this.windowWidth = width;
@@ -19,7 +22,9 @@ public class GameManager
                 60, 40, 3*Math.PI/2, 1, .1, .008,
                 Math.PI/10, new Color(20, 40, 100));
 
-        this.surface = new IceSurface(6, this.windowWidth, this.windowHeight);
+        this.renderRadius = Math.sqrt(zamboni.getXWidth()*zamboni.getXWidth()/4 + zamboni.getYWidth()*zamboni.getYWidth()/4);
+
+        this.surface = new IceSurface(10, this.windowWidth, this.windowHeight);
     }
 
     public void tick()
@@ -57,5 +62,14 @@ public class GameManager
     public double getWindowWidth()
     {
         return this.windowWidth;
+    }
+
+    public double getRenderRadius()
+    {
+        return this.renderRadius;
+    }
+    public Point getRenderCenter()
+    {
+        return this.zamboni.getHitbox().getCenter();
     }
 }
