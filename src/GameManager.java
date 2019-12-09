@@ -66,7 +66,7 @@ public class GameManager
         g2d.setFont(new Font("Courier", Font.PLAIN, 24));
         g2d.setColor(Color.BLACK);
         int pixelLength = g2d.getFontMetrics().stringWidth(Integer.toString(numSquaresLeft)); // the number of pixels the string is long
-        g2d.drawString(Integer.toString(numSquaresLeft), this.windowWidth/2 - pixelLength/2, this.windowHeight/2);
+        g2d.drawString(Integer.toString(numSquaresLeft), this.windowWidth/2 - pixelLength/2, this.windowHeight + 32);
 
         this.numFrames++;
     }
