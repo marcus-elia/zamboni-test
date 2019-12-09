@@ -47,7 +47,7 @@ public class GameManager
     {
         this.border.tick();
         this.zamboni.tick();
-        this.surface.updateSquares(this.zamboni.getHitbox(), this.getTopLeftRenderCorner(),
+        this.numSquaresLeft -= this.surface.updateSquares(this.zamboni.getHitbox(), this.getTopLeftRenderCorner(),
                 this.getRenderRectXSize(), this.getRenderRectYSize());
     }
 
@@ -62,6 +62,11 @@ public class GameManager
         this.surface.render(g2d, this.getTopLeftRenderCorner(), this.getRenderRectXSize(), this.getRenderRectYSize());
         this.border.render(g2d);
         this.zamboni.render(g2d);
+
+        g2d.setFont(new Font("Courier", Font.PLAIN, 24));
+        g2d.setColor(Color.BLACK);
+        int pixelLength = g2d.getFontMetrics().stringWidth(Integer.toString(numSquaresLeft)); // the number of pixels the string is long
+        g2d.drawString(Integer.toString(numSquaresLeft), this.windowWidth/2 - pixelLength/2, this.windowHeight/2);
 
         this.numFrames++;
     }
