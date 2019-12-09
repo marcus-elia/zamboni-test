@@ -96,6 +96,10 @@ public class IceSurface
     {
         return this.numCols;
     }
+    public IceSquare getIceSquare(int i, int j)
+    {
+        return this.squares[i][j];
+    }
 
 
     public void updateSquares(Rectangle r, Point renderTopLeft, int renderRectXSize, int renderRectYSize)
