@@ -11,6 +11,10 @@ public class GameManager
 
     private int squareSize;
     private IceSurface surface;
+    // how many squares are actually on the rink
+    private int numSquaresOnRink;
+    // how many squares are left to zamboni
+    private int numSquaresLeft;
 
     // How far from the zamboni needs to be redrawn each frame
     private double renderRadius;
@@ -31,6 +35,9 @@ public class GameManager
 
         this.squareSize = 4;
         this.surface = new IceSurface(this.squareSize, this.windowWidth, this.windowHeight);
+
+        this.numSquaresOnRink = this.countSquaresOnRink();
+        this.numSquaresLeft = this.numSquaresOnRink + 0;
 
         this.renderRadius = Math.sqrt(zamboni.getXWidth()*zamboni.getXWidth()/4 + zamboni.getYWidth()*zamboni.getYWidth()/4)
                                + this.squareSize;
@@ -89,6 +96,79 @@ public class GameManager
     public Point getRenderCenter()
     {
         return this.zamboni.getHitbox().getCenter();
+    }
+
+
+    // =======================================
+    //
+    //             Helper Functions
+    //            for the Constructor
+    //
+    // =======================================
+    public boolean isOnRink(IceSquare isq)
+    {
+        int radius = this.windowHeight / 8;
+        double x = isq.getCenter().x;
+        double y = isq.getCenter().y;
+
+        // If the point is in the middle rectangle of the rink
+        if(y > radius && y < this.windowHeight - radius)
+        {
+            return x > this.border.getThickness() && x < this.windowWidth - this.border.getThickness();
+        }
+        // If the point is near the top
+        else if(y > this.border.getThickness() && y <= radius)
+        {
+            // Top left
+            if(x < radius)
+            {
+                return this.border.getTopLeftWall().getCenter().distanceToOtherPoint(isq.getCenter()) < radius;
+            }
+            // Top right
+            else if(x > this.windowWidth - radius)
+            {
+                return this.border.getTopRightWall().getCenter().distanceToOtherPoint(isq.getCenter()) < radius;
+            }
+            // Top middle
+            else
+            {
+                return true;
+            }
+        }
+        // If the point is near the bottom
+        else
+        {
+            // Bottom left
+            if(x < radius)
+            {
+                return this.border.getBottomLeftWall().getCenter().distanceToOtherPoint(isq.getCenter()) < radius;
+            }
+            // Bottom right
+            else if(x > this.windowWidth - radius)
+            {
+                return this.border.getBottomRightWall().getCenter().distanceToOtherPoint(isq.getCenter()) < radius;
+            }
+            // Top middle
+            else
+            {
+                return true;
+            }
+        }
+    }
+    public int countSquaresOnRink()
+    {
+        int count = 0;
+        for(int i = 0; i < this.surface.getNumCols(); i++)
+        {
+            for(int j = 0; j < this.surface.getNumCols(); j++)
+            {
+                if(this.isOnRink(surface.getIceSquare(i,j)))
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     // =======================================
