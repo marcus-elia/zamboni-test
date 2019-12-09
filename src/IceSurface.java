@@ -83,6 +83,20 @@ public class IceSurface
         }
     }
 
+    // ====================================
+    //
+    //              Getters
+    //
+    // ===================================
+    public int getNumRows()
+    {
+        return this.numRows;
+    }
+    public int getNumCols()
+    {
+        return this.numCols;
+    }
+
 
     public void updateSquares(Rectangle r, Point renderTopLeft, int renderRectXSize, int renderRectYSize)
     {
