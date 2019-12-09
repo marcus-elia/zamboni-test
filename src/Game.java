@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class Game extends Canvas implements Runnable
 {
-    public static final int WIDTH = 324, HEIGHT = 512;
+    public static final int WIDTH = 324, HEIGHT = 552;
     private Thread thread;
     private boolean running = false;
 
@@ -20,7 +20,7 @@ public class Game extends Canvas implements Runnable
 
     public Game()
     {
-        gameManager = new GameManager(WIDTH, HEIGHT);
+        gameManager = new GameManager(WIDTH, HEIGHT - 40);
         this.addKeyListener(new KeyInput(gameManager));
         new Window(WIDTH, HEIGHT, "Zamboni", this);
 
@@ -96,6 +96,8 @@ public class Game extends Canvas implements Runnable
         g2d.setColor(Color.gray);
         g2d.fillRect((int)gameManager.getTopLeftRenderCorner().x, (int)gameManager.getTopLeftRenderCorner().y,
                 gameManager.getRenderRectXSize(), gameManager.getRenderRectYSize());
+
+        g2d.fillRect(0, HEIGHT - 40, WIDTH, 40);
 
         gameManager.render(g2d);
 
