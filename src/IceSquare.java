@@ -10,6 +10,8 @@ public class IceSquare
     private Rectangle2D rect;
     private Point center;
 
+    private boolean hasBeenZambonied;
+
     // The RGB color with alpha
     private Color renderColor;
 
@@ -21,6 +23,7 @@ public class IceSquare
         this.renderColor = new Color(iceColor.getRed()/255.0f, iceColor.getGreen()/255.0f, iceColor.getBlue()/255.0f, 0.5f);
         this.rect = new Rectangle2D.Double(topLeft.x, topLeft.y, size, size);
         this.center = new Point(x + size/2, y + size/2);
+        this.hasBeenZambonied = false;
     }
 
     public void render(Graphics2D g2d)
@@ -47,8 +50,16 @@ public class IceSquare
     }
 
     // Set the alpha to 1
-    public void getZambonied()
+    // Return true if this has already been zambonied
+    // False if we are zamboniing it for the first time
+    public boolean getZambonied()
     {
         this.renderColor = new Color(iceColor.getRed()/255.0f, iceColor.getGreen()/255.0f, iceColor.getBlue()/255.0f, 1f);
+        if(!this.hasBeenZambonied)
+        {
+            this.hasBeenZambonied = true;
+            return false;
+        }
+        return true;
     }
 }
