@@ -102,19 +102,26 @@ public class IceSurface
     }
 
 
-    public void updateSquares(Rectangle r, Point renderTopLeft, int renderRectXSize, int renderRectYSize)
+    // If a square is in the rectangle argument, it gets zambonied.
+    // Returns the number of squares that got zambonied
+    public int updateSquares(Rectangle r, Point renderTopLeft, int renderRectXSize, int renderRectYSize)
     {
         int numSquaresX = renderRectXSize/squareSize;
         int numSquaresY = renderRectYSize/squareSize;
+        int numZambonied = 0;
         for(int i = Math.max((int)renderTopLeft.x/squareSize, 0); i < Math.min((int)renderTopLeft.x/squareSize + numSquaresX, numCols); i++)
         {
             for(int j = Math.max((int)renderTopLeft.y/squareSize, 0); j < Math.min((int)renderTopLeft.y/squareSize + numSquaresY, numRows); j++)
             {
                 if(r.isInside(squares[i][j]))
                 {
-                    squares[i][j].getZambonied();
+                    if(squares[i][j].getZambonied())
+                    {
+                        numZambonied++;
+                    }
                 }
             }
         }
+        return numZambonied;
     }
 }
