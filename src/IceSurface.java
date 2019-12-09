@@ -115,7 +115,7 @@ public class IceSurface
             {
                 if(r.isInside(squares[i][j]))
                 {
-                    if(squares[i][j].getZambonied())
+                    if(!squares[i][j].getZambonied())
                     {
                         numZambonied++;
                     }
