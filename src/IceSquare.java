@@ -35,7 +35,11 @@ public class IceSquare
 
 
 
-
+    // ==================================
+    //
+    //             Getters
+    //
+    // ==================================
     public Point getTopLeft()
     {
         return this.topLeft;
@@ -47,6 +51,16 @@ public class IceSquare
     public Point getCenter()
     {
         return this.center;
+    }
+
+    // ==================================
+    //
+    //             Setters
+    //
+    // ==================================
+    public void setColor(Color input)
+    {
+        this.iceColor = input;
     }
 
     // Set the alpha to 1
