@@ -62,4 +62,55 @@ public class IceSquare
         }
         return true;
     }
+
+    public boolean isOnRink(int width, int height, RinkBorder border)
+    {
+        int radius = height / 8;
+        double x = this.getCenter().x;
+        double y = this.getCenter().y;
+
+        // If the point is in the middle rectangle of the rink
+        if(y > radius && y < height - radius)
+        {
+            return x > border.getThickness() && x < width - border.getThickness();
+        }
+        // If the point is near the top
+        else if(y > border.getThickness() && y <= radius)
+        {
+            // Top left
+            if(x < radius)
+            {
+                return border.getTopLeftWall().getCenter().distanceToOtherPoint(this.getCenter()) < radius;
+            }
+            // Top right
+            else if(x > width - radius)
+            {
+                return border.getTopRightWall().getCenter().distanceToOtherPoint(this.getCenter()) < radius;
+            }
+            // Top middle
+            else
+            {
+                return true;
+            }
+        }
+        // If the point is near the bottom
+        else
+        {
+            // Bottom left
+            if(x < radius)
+            {
+                return border.getBottomLeftWall().getCenter().distanceToOtherPoint(this.getCenter()) < radius;
+            }
+            // Bottom right
+            else if(x > width - radius)
+            {
+                return border.getBottomRightWall().getCenter().distanceToOtherPoint(this.getCenter()) < radius;
+            }
+            // Top middle
+            else
+            {
+                return true;
+            }
+        }
+    }
 }

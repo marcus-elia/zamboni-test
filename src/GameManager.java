@@ -110,56 +110,6 @@ public class GameManager
     //            for the Constructor
     //
     // =======================================
-    public boolean isOnRink(IceSquare isq)
-    {
-        int radius = this.windowHeight / 8;
-        double x = isq.getCenter().x;
-        double y = isq.getCenter().y;
-
-        // If the point is in the middle rectangle of the rink
-        if(y > radius && y < this.windowHeight - radius)
-        {
-            return x > this.border.getThickness() && x < this.windowWidth - this.border.getThickness();
-        }
-        // If the point is near the top
-        else if(y > this.border.getThickness() && y <= radius)
-        {
-            // Top left
-            if(x < radius)
-            {
-                return this.border.getTopLeftWall().getCenter().distanceToOtherPoint(isq.getCenter()) < radius;
-            }
-            // Top right
-            else if(x > this.windowWidth - radius)
-            {
-                return this.border.getTopRightWall().getCenter().distanceToOtherPoint(isq.getCenter()) < radius;
-            }
-            // Top middle
-            else
-            {
-                return true;
-            }
-        }
-        // If the point is near the bottom
-        else
-        {
-            // Bottom left
-            if(x < radius)
-            {
-                return this.border.getBottomLeftWall().getCenter().distanceToOtherPoint(isq.getCenter()) < radius;
-            }
-            // Bottom right
-            else if(x > this.windowWidth - radius)
-            {
-                return this.border.getBottomRightWall().getCenter().distanceToOtherPoint(isq.getCenter()) < radius;
-            }
-            // Top middle
-            else
-            {
-                return true;
-            }
-        }
-    }
     public int countSquaresOnRink()
     {
         int count = 0;
@@ -167,7 +117,7 @@ public class GameManager
         {
             for(int j = 0; j < this.surface.getNumCols(); j++)
             {
-                if(this.isOnRink(surface.getIceSquare(i,j)))
+                if(surface.getIceSquare(i,j).isOnRink(windowWidth, windowHeight, border))
                 {
                     count++;
                 }
