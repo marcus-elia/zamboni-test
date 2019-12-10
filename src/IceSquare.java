@@ -109,7 +109,7 @@ public class IceSquare
             return this.getLeft() >= border.getThickness() && this.getRight() <= width - border.getThickness();
         }
         // If the point is near the top
-        else if(y > border.getThickness() && y <= radius)
+        else if(y <= radius)
         {
             // Top left
             if(x < radius)
@@ -126,7 +126,7 @@ public class IceSquare
             // Top middle
             else
             {
-                return true;
+                return this.getTop() >= border.getThickness();
             }
         }
         // If the point is near the bottom
