@@ -102,7 +102,7 @@ public class IceSquare
         // If the point is in the middle rectangle of the rink
         if(y > radius && y < height - radius)
         {
-            return this.getLeft() > border.getThickness() && this.getRight() < width - border.getThickness();
+            return this.getLeft() >= border.getThickness() && this.getRight() <= width - border.getThickness();
         }
         // If the point is near the top
         else if(y > border.getThickness() && y <= radius)
@@ -139,7 +139,7 @@ public class IceSquare
             // Bottom middle
             else
             {
-                return this.getBottom() < height - border.getThickness();
+                return this.getBottom() <= height - border.getThickness();
             }
         }
     }
