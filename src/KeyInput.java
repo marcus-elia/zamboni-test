@@ -41,6 +41,10 @@ public class KeyInput extends KeyAdapter
         {
             manager.printUnzamboniedSquares();
         }
+        else if(key == KeyEvent.VK_SPACE)
+        {
+            manager.getZamboni().turboBoost(5);
+        }
 
         if (key == KeyEvent.VK_W)
         {

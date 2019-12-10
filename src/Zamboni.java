@@ -424,7 +424,12 @@ public class Zamboni
         {
             this.correctBottom();
         }
+    }
 
 
+    public void turboBoost(double amount)
+    {
+        this.curSpeed += amount;
+        this.setVelocityComponents();
     }
 }
