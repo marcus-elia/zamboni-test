@@ -115,7 +115,7 @@ public class GameManager
         int count = 0;
         for(int i = 0; i < this.surface.getNumCols(); i++)
         {
-            for(int j = 0; j < this.surface.getNumCols(); j++)
+            for(int j = 0; j < this.surface.getNumRows(); j++)
             {
                 if(surface.getIceSquare(i,j).isOnRink(windowWidth, windowHeight, border))
                 {
