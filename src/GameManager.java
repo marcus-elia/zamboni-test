@@ -176,7 +176,7 @@ public class GameManager
         {
             for (int j = 0; j < this.surface.getNumRows(); j++)
             {
-                if (!surface.getIceSquare(i, j).getZambonied())
+                if (!surface.getIceSquare(i, j).getHasBeenZambonied())
                 {
                     System.out.println(Integer.toString((int) surface.getIceSquare(i, j).getCenter().x) + ", " +
                             Integer.toString((int) surface.getIceSquare(i, j).getCenter().y));
