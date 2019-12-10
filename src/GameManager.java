@@ -168,4 +168,20 @@ public class GameManager
     {
         return (int)this.getBottomRightRenderCorner().y - (int)this.getTopLeftRenderCorner().y;
     }
+
+    // For debugging, print out the locations of the squares that have not been zambonied yet
+    public void printUnzamboniedSquares()
+    {
+        for(int i = 0; i < this.surface.getNumCols(); i++)
+        {
+            for (int j = 0; j < this.surface.getNumRows(); j++)
+            {
+                if (!surface.getIceSquare(i, j).getZambonied())
+                {
+                    System.out.println(Integer.toString((int) surface.getIceSquare(i, j).getCenter().x) + ", " +
+                            Integer.toString((int) surface.getIceSquare(i, j).getCenter().y));
+                }
+            }
+        }
+    }
 }

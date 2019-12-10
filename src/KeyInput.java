@@ -36,6 +36,12 @@ public class KeyInput extends KeyAdapter
     {
         int key = e.getKeyCode();
 
+        // debug
+        if(key == KeyEvent.VK_P)
+        {
+            manager.printUnzamboniedSquares();
+        }
+
         if (key == KeyEvent.VK_W)
         {
             manager.getZamboni().setGasPedal(false);
