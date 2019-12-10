@@ -52,6 +52,10 @@ public class IceSquare
     {
         return this.center;
     }
+    public boolean getHasBeenZambonied()
+    {
+        return this.hasBeenZambonied;
+    }
     public int getTop() // Return the lowest y-value
     {
         return (int)this.topLeft.y;
