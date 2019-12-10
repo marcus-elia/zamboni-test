@@ -121,6 +121,10 @@ public class GameManager
                 {
                     count++;
                 }
+                else  // if not on rink, set the zambonied boolean to false so we never count this square
+                {
+                    surface.getIceSquare(i,j).getZambonied();
+                }
             }
         }
         return count;
