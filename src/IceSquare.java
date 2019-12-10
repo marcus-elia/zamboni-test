@@ -52,6 +52,22 @@ public class IceSquare
     {
         return this.center;
     }
+    public int getTop() // Return the lowest y-value
+    {
+        return (int)this.topLeft.y;
+    }
+    public int getBottom() // Return the highest y-value
+    {
+        return (int)this.topLeft.y + this.size;
+    }
+    public int getLeft() // Return the lowest x-value
+    {
+        return (int)this.topLeft.x;
+    }
+    public int getRight() // Return the highest x-value
+    {
+        return (int)this.topLeft.x + this.size;
+    }
 
     // ==================================
     //
@@ -86,7 +102,7 @@ public class IceSquare
         // If the point is in the middle rectangle of the rink
         if(y > radius && y < height - radius)
         {
-            return x > border.getThickness() && x < width - border.getThickness();
+            return this.getLeft() > border.getThickness() && this.getRight() < width - border.getThickness();
         }
         // If the point is near the top
         else if(y > border.getThickness() && y <= radius)
@@ -94,12 +110,12 @@ public class IceSquare
             // Top left
             if(x < radius)
             {
-                return border.getTopLeftWall().getCenter().distanceToOtherPoint(this.getCenter()) < radius;
+                return border.getTopLeftWall().getCenter().distanceToOtherPoint(this.getLeft(), this.getTop()) < radius;
             }
             // Top right
             else if(x > width - radius)
             {
-                return border.getTopRightWall().getCenter().distanceToOtherPoint(this.getCenter()) < radius;
+                return border.getTopRightWall().getCenter().distanceToOtherPoint(this.getRight(), this.getTop()) < radius;
             }
             // Top middle
             else
@@ -113,17 +129,17 @@ public class IceSquare
             // Bottom left
             if(x < radius)
             {
-                return border.getBottomLeftWall().getCenter().distanceToOtherPoint(this.getCenter()) < radius;
+                return border.getBottomLeftWall().getCenter().distanceToOtherPoint(this.getLeft(), this.getBottom()) < radius;
             }
             // Bottom right
             else if(x > width - radius)
             {
-                return border.getBottomRightWall().getCenter().distanceToOtherPoint(this.getCenter()) < radius;
+                return border.getBottomRightWall().getCenter().distanceToOtherPoint(this.getRight(), this.getBottom()) < radius;
             }
             // Bottom middle
             else
             {
-                return y < height - border.getThickness();
+                return this.getBottom() < height - border.getThickness();
             }
         }
     }
