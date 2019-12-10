@@ -120,10 +120,10 @@ public class IceSquare
             {
                 return border.getBottomRightWall().getCenter().distanceToOtherPoint(this.getCenter()) < radius;
             }
-            // Top middle
+            // Bottom middle
             else
             {
-                return true;
+                return y < height - border.getThickness();
             }
         }
     }
