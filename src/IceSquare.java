@@ -110,12 +110,14 @@ public class IceSquare
             // Top left
             if(x < radius)
             {
-                return border.getTopLeftWall().getCenter().distanceToOtherPoint(this.getLeft(), this.getTop()) < radius;
+                return border.getTopLeftWall().getCenter().distanceToOtherPoint(this.getLeft(), this.getTop()) <
+                        radius - border.getThickness();
             }
             // Top right
             else if(x > width - radius)
             {
-                return border.getTopRightWall().getCenter().distanceToOtherPoint(this.getRight(), this.getTop()) < radius;
+                return border.getTopRightWall().getCenter().distanceToOtherPoint(this.getRight(), this.getTop()) <
+                        radius - border.getThickness();
             }
             // Top middle
             else
@@ -129,12 +131,14 @@ public class IceSquare
             // Bottom left
             if(x < radius)
             {
-                return border.getBottomLeftWall().getCenter().distanceToOtherPoint(this.getLeft(), this.getBottom()) < radius;
+                return border.getBottomLeftWall().getCenter().distanceToOtherPoint(this.getLeft(), this.getBottom()) <
+                        radius - border.getThickness();
             }
             // Bottom right
             else if(x > width - radius)
             {
-                return border.getBottomRightWall().getCenter().distanceToOtherPoint(this.getRight(), this.getBottom()) < radius;
+                return border.getBottomRightWall().getCenter().distanceToOtherPoint(this.getRight(), this.getBottom()) <
+                        radius - border.getThickness();
             }
             // Bottom middle
             else
