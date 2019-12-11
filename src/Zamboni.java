@@ -108,6 +108,10 @@ public class Zamboni
     {
         return this.yWidth;
     }
+    public double getCurSpeed()
+    {
+        return this.curSpeed;
+    }
 
     // ===================================
     //
