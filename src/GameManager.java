@@ -18,6 +18,8 @@ public class GameManager
 
     private double distanceTraveled; // How far the player has moved in total
     private double percent; // How much of the rink has been zambonied
+    private int timeElapsed; // In seconds
+    private final long startTime;
 
     // How far from the zamboni needs to be redrawn each frame
     private double renderRadius;
@@ -47,6 +49,8 @@ public class GameManager
 
         this.distanceTraveled = 0;
         this.percent = 100 - this.numSquaresLeft*100.0 / this.numSquaresOnRink;
+        this.timeElapsed = 0;
+        this.startTime = System.currentTimeMillis();
     }
 
     public void tick()
@@ -58,6 +62,7 @@ public class GameManager
 
         this.distanceTraveled += this.zamboni.getCurSpeed();
         this.percent = 100 - this.numSquaresLeft*100.0 / this.numSquaresOnRink;
+        this.timeElapsed = (int)(System.currentTimeMillis() - this.startTime) / 1000;
     }
 
     public void render(Graphics2D g2d)
@@ -88,6 +93,7 @@ public class GameManager
     {
         this.drawPercent(g2d);
         this.drawDistance(g2d);
+        this.drawTime(g2d);
     }
 
     public void drawPercent(Graphics2D g2d)
@@ -112,7 +118,7 @@ public class GameManager
 
     public void drawDistance(Graphics2D g2d)
     {
-        // The actual percentage
+        // The actual distance
         g2d.setFont(new Font("Courier", Font.PLAIN, 24));
         g2d.setColor(Color.BLACK);
         int pixelLength = g2d.getFontMetrics().stringWidth(this.getDistanceTraveled());
@@ -128,6 +134,32 @@ public class GameManager
     public String getDistanceTraveled()
     {
         return String.format("%.2f", this.distanceTraveled*.4/5280) + "mi";
+    }
+
+    public void drawTime(Graphics2D g2d)
+    {
+        // The actual time
+        g2d.setFont(new Font("Courier", Font.PLAIN, 24));
+        g2d.setColor(Color.BLACK);
+        int pixelLength = g2d.getFontMetrics().stringWidth(this.getTime());
+        g2d.drawString(this.getTime(), this.windowWidth/4 - pixelLength/2, this.windowHeight + 32);
+
+        // The word "Distance"
+        g2d.setFont(new Font("Courier", Font.PLAIN, 16));
+        g2d.setColor(Color.BLACK);
+        pixelLength = g2d.getFontMetrics().stringWidth("Time");
+        g2d.drawString("Time", this.windowWidth/4 - pixelLength/2, this.windowHeight + 54);
+    }
+
+    public String getTime()
+    {
+        int minutes = this.timeElapsed/60;
+        int seconds = this.timeElapsed % 60;
+        if(seconds < 10)
+        {
+            return minutes + ":0" + seconds;
+        }
+        return minutes + ":" + seconds;
     }
 
     // ===================================
