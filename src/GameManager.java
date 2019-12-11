@@ -2,6 +2,8 @@ import java.awt.*;
 
 public class GameManager
 {
+    private GameMode currentMode;
+
     private int numFrames;
 
     private int windowWidth;
@@ -26,6 +28,8 @@ public class GameManager
 
     public GameManager(int width, int height)
     {
+        this.currentMode = GameMode.InGame;
+
         this.numFrames = 0;
 
         this.windowWidth = width;
@@ -55,31 +59,39 @@ public class GameManager
 
     public void tick()
     {
-        this.border.tick();
-        this.zamboni.tick();
-        this.numSquaresLeft -= this.surface.updateSquares(this.zamboni.getHitbox(), this.getTopLeftRenderCorner(),
-                this.getRenderRectXSize(), this.getRenderRectYSize());
+        if(this.currentMode == GameMode.InGame)
+        {
+            this.border.tick();
+            this.zamboni.tick();
+            this.numSquaresLeft -= this.surface.updateSquares(this.zamboni.getHitbox(), this.getTopLeftRenderCorner(),
+                    this.getRenderRectXSize(), this.getRenderRectYSize());
 
-        this.distanceTraveled += this.zamboni.getCurSpeed();
-        this.percent = 100 - this.numSquaresLeft*100.0 / this.numSquaresOnRink;
-        this.timeElapsed = (int)(System.currentTimeMillis() - this.startTime) / 1000;
+            this.distanceTraveled += this.zamboni.getCurSpeed();
+            this.percent = 100 - this.numSquaresLeft*100.0 / this.numSquaresOnRink;
+            this.timeElapsed = (int)(System.currentTimeMillis() - this.startTime) / 1000;
+        }
+
     }
 
     public void render(Graphics2D g2d)
     {
-        if(this.numFrames == 0)
+        if(this.currentMode == GameMode.InGame)
         {
-            g2d.setColor(Color.gray);
-            g2d.fillRect(0,0, this.windowWidth, this.windowHeight);
-            this.surface.renderEverything(g2d);
+            if(this.numFrames == 0)
+            {
+                g2d.setColor(Color.gray);
+                g2d.fillRect(0,0, this.windowWidth, this.windowHeight);
+                this.surface.renderEverything(g2d);
+            }
+            this.surface.render(g2d, this.getTopLeftRenderCorner(), this.getRenderRectXSize(), this.getRenderRectYSize());
+            this.border.render(g2d);
+            this.zamboni.render(g2d);
+
+            this.drawStrings(g2d);
+
+            this.numFrames++;
         }
-        this.surface.render(g2d, this.getTopLeftRenderCorner(), this.getRenderRectXSize(), this.getRenderRectYSize());
-        this.border.render(g2d);
-        this.zamboni.render(g2d);
 
-        this.drawStrings(g2d);
-
-        this.numFrames++;
     }
 
 
@@ -182,6 +194,10 @@ public class GameManager
     public double getWindowWidth()
     {
         return this.windowWidth;
+    }
+    public GameMode getCurrentMode()
+    {
+        return this.currentMode;
     }
 
     public double getRenderRadius()
