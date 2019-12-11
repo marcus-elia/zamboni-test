@@ -87,7 +87,7 @@ public class GameManager
     public void drawStrings(Graphics2D g2d)
     {
         this.drawPercent(g2d);
-        //this.drawDistance(g2d);
+        this.drawDistance(g2d);
     }
 
     public void drawPercent(Graphics2D g2d)
@@ -102,7 +102,32 @@ public class GameManager
         g2d.setFont(new Font("Courier", Font.PLAIN, 16));
         g2d.setColor(Color.BLACK);
         pixelLength = g2d.getFontMetrics().stringWidth("Percent"); // the number of pixels the string is long
-        g2d.drawString("Percent", this.windowWidth/2 - pixelLength/2, this.windowHeight + 48);
+        g2d.drawString("Percent", this.windowWidth/2 - pixelLength/2, this.windowHeight + 54);
+    }
+
+    public String getPercentZambonied()
+    {
+        return String.format("%.2f", 100 - this.numSquaresLeft*100.0 / this.numSquaresOnRink);
+    }
+
+    public void drawDistance(Graphics2D g2d)
+    {
+        // The actual percentage
+        g2d.setFont(new Font("Courier", Font.PLAIN, 24));
+        g2d.setColor(Color.BLACK);
+        int pixelLength = g2d.getFontMetrics().stringWidth(this.getDistanceTraveled());
+        g2d.drawString(this.getDistanceTraveled(), 3*this.windowWidth/4 - pixelLength/2, this.windowHeight + 32);
+
+        // The word "Distance"
+        g2d.setFont(new Font("Courier", Font.PLAIN, 16));
+        g2d.setColor(Color.BLACK);
+        pixelLength = g2d.getFontMetrics().stringWidth("Distance");
+        g2d.drawString("Distance", 3*this.windowWidth/4 - pixelLength/2, this.windowHeight + 54);
+    }
+
+    public String getDistanceTraveled()
+    {
+        return String.format("%.2f", this.distanceTraveled*.4/5280) + "mi";
     }
 
     // ===================================
@@ -136,10 +161,7 @@ public class GameManager
         return this.zamboni.getHitbox().getCenter();
     }
 
-    public String getPercentZambonied()
-    {
-        return String.format("%.2f", 100 - this.numSquaresLeft*100.0 / this.numSquaresOnRink) + "%";
-    }
+
 
 
     // =======================================
