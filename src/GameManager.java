@@ -16,6 +16,9 @@ public class GameManager
     // how many squares are left to zamboni
     private int numSquaresLeft;
 
+    private double distanceTraveled; // How far the player has moved in total
+    private double percent; // How much of the rink has been zambonied
+
     // How far from the zamboni needs to be redrawn each frame
     private double renderRadius;
 
@@ -41,6 +44,9 @@ public class GameManager
 
         this.renderRadius = Math.sqrt(zamboni.getXWidth()*zamboni.getXWidth()/4 + zamboni.getYWidth()*zamboni.getYWidth()/4)
                                + this.squareSize;
+
+        this.distanceTraveled = 0;
+        this.percent = 100 - this.numSquaresLeft*100.0 / this.numSquaresOnRink;
     }
 
     public void tick()
@@ -49,6 +55,9 @@ public class GameManager
         this.zamboni.tick();
         this.numSquaresLeft -= this.surface.updateSquares(this.zamboni.getHitbox(), this.getTopLeftRenderCorner(),
                 this.getRenderRectXSize(), this.getRenderRectYSize());
+
+        this.distanceTraveled += this.zamboni.getCurSpeed();
+        this.percent = 100 - this.numSquaresLeft*100.0 / this.numSquaresOnRink;
     }
 
     public void render(Graphics2D g2d)
@@ -63,14 +72,38 @@ public class GameManager
         this.border.render(g2d);
         this.zamboni.render(g2d);
 
+        this.drawStrings(g2d);
+
+        this.numFrames++;
+    }
+
+
+    // ===================================
+    //
+    //          Helper Functions
+    //           For Rendering
+    //
+    // ===================================
+    public void drawStrings(Graphics2D g2d)
+    {
+        this.drawPercent(g2d);
+        //this.drawDistance(g2d);
+    }
+
+    public void drawPercent(Graphics2D g2d)
+    {
+        // The actual percentage
         g2d.setFont(new Font("Courier", Font.PLAIN, 24));
         g2d.setColor(Color.BLACK);
         int pixelLength = g2d.getFontMetrics().stringWidth(this.getPercentZambonied()); // the number of pixels the string is long
         g2d.drawString(this.getPercentZambonied(), this.windowWidth/2 - pixelLength/2, this.windowHeight + 32);
 
-        this.numFrames++;
+        // The word Percent
+        g2d.setFont(new Font("Courier", Font.PLAIN, 16));
+        g2d.setColor(Color.BLACK);
+        pixelLength = g2d.getFontMetrics().stringWidth("Percent"); // the number of pixels the string is long
+        g2d.drawString("Percent", this.windowWidth/2 - pixelLength/2, this.windowHeight + 48);
     }
-
 
     // ===================================
     //
