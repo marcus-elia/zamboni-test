@@ -93,11 +93,11 @@ public class Game extends Canvas implements Runnable
         Graphics2D g2d = (Graphics2D) bs.getDrawGraphics();
 
 
-        g2d.setColor(Color.gray);
+        /*g2d.setColor(Color.gray);
         g2d.fillRect((int)gameManager.getTopLeftRenderCorner().x, (int)gameManager.getTopLeftRenderCorner().y,
                 gameManager.getRenderRectXSize(), gameManager.getRenderRectYSize());
 
-        g2d.fillRect(0, HEIGHT - 60, WIDTH, 60);
+        g2d.fillRect(0, HEIGHT - 60, WIDTH, 60);*/
 
         gameManager.render(g2d);
 
