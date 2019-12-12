@@ -4,6 +4,8 @@ public class GameManager
 {
     private GameMode currentMode;
 
+    private ZamboniButton playButton;
+
     private int numFrames;
 
     private int windowWidth;
@@ -28,12 +30,14 @@ public class GameManager
 
     public GameManager(int width, int height)
     {
-        this.currentMode = GameMode.InGame;
+        this.currentMode = GameMode.Intro;
 
         this.numFrames = 0;
 
         this.windowWidth = width;
         this.windowHeight = height;
+
+        this.playButton = new ZamboniButton(windowWidth/2, windowHeight/2);
 
         this.border = new RinkBorder(this, this.windowWidth, this.windowHeight, 4);
 
@@ -75,8 +79,19 @@ public class GameManager
 
     public void render(Graphics2D g2d)
     {
-        if(this.currentMode == GameMode.InGame)
+        if(this.currentMode == GameMode.Intro)
         {
+            g2d.setColor(Color.gray);
+            g2d.fillRect(0,0, windowWidth, windowHeight + 60);
+            this.playButton.render(g2d);
+        }
+        else if(this.currentMode == GameMode.InGame)
+        {
+            g2d.setColor(Color.gray);
+            g2d.fillRect((int)this.getTopLeftRenderCorner().x, (int)this.getTopLeftRenderCorner().y,
+                    this.getRenderRectXSize(), this.getRenderRectYSize());
+
+            g2d.fillRect(0, windowHeight, windowWidth, 60);
             if(this.numFrames == 0)
             {
                 g2d.setColor(Color.gray);
