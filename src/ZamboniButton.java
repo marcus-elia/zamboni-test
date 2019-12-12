@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Path2D;
 
 // A button shaped like a zamboni. Click on it to start the game
@@ -9,6 +10,8 @@ public class ZamboniButton
 
     private Path2D snowTank;
     private Path2D body;
+    private Wheel frontWheel;
+    private Wheel backWheel;
 
     public ZamboniButton(int inputX, int inputY)
     {
@@ -17,20 +20,21 @@ public class ZamboniButton
 
         this.makeSnowTank();
         this.makeBody();
+        this.makeWheels();
     }
 
-    // =====================================
+    // ======================================
     //
     //             Helper Functions
     //           for the Constructor
     //
-    // =====================================
+    // ======================================
     public void makeSnowTank()
     {
         snowTank = new Path2D.Double();
         snowTank.moveTo(x,y);
-        snowTank.lineTo(x - 120, y - 6);
-        snowTank.lineTo(x - 120, y - 30);
+        snowTank.lineTo(x - 120, y - 12);
+        snowTank.lineTo(x - 120, y - 36);
         snowTank.lineTo(x, y - 48);
         snowTank.lineTo(x,y);
     }
@@ -38,7 +42,7 @@ public class ZamboniButton
     {
         body = new Path2D.Double();
         body.moveTo(x,y);
-        body.lineTo(x - 120, y - 6);
+        body.lineTo(x - 120, y - 12);
         body.lineTo(x - 120, y + 30);
         body.lineTo(x - 114, y + 30);
 
@@ -66,6 +70,12 @@ public class ZamboniButton
         body.lineTo(x, y);
     }
 
+    public void makeWheels()
+    {
+        this.frontWheel = new Wheel(x - 96, y + 30, 17, 12);
+        this.backWheel = new Wheel(x, y + 30, 17, 12);
+    }
+
 
 
 
@@ -78,5 +88,8 @@ public class ZamboniButton
 
         g2d.setColor(Color.blue);
         g2d.fill(this.body);
+
+        this.frontWheel.render(g2d);
+        this.backWheel.render(g2d);
     }
 }
