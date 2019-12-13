@@ -23,7 +23,7 @@ public class GameManager
     private double distanceTraveled; // How far the player has moved in total
     private double percent; // How much of the rink has been zambonied
     private int timeElapsed; // In seconds
-    private long startTime;
+    private int prevTime;
 
     // How far from the zamboni needs to be redrawn each frame
     private double renderRadius;
@@ -72,7 +72,8 @@ public class GameManager
 
             this.distanceTraveled += this.zamboni.getCurSpeed();
             this.percent = 100 - this.numSquaresLeft*100.0 / this.numSquaresOnRink;
-            this.timeElapsed = (int)(System.currentTimeMillis() - this.startTime) / 1000;
+            this.timeElapsed += (int)System.currentTimeMillis()/1000 - this.prevTime;
+            this.prevTime = (int)System.currentTimeMillis()/1000;
         }
 
     }
@@ -316,6 +317,15 @@ public class GameManager
     public void startGame()
     {
         this.currentMode = GameMode.InGame;
-        this.startTime = System.currentTimeMillis();
+        this.prevTime = (int)System.currentTimeMillis()/1000;
+    }
+    public void pause()
+    {
+        this.currentMode = GameMode.Paused;
+    }
+    public void unpause()
+    {
+        this.currentMode = GameMode.InGame;
+        this.prevTime = (int)System.currentTimeMillis()/1000;
     }
 }
