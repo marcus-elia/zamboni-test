@@ -78,6 +78,11 @@ public class GameManager
             this.percent = 100 - this.numSquaresLeft*100.0 / this.numSquaresOnRink;
             this.timeElapsed += (int)System.currentTimeMillis()/1000 - this.prevTime;
             this.prevTime = (int)System.currentTimeMillis()/1000;
+
+            if(this.getPercentZambonied().equals("100.00"))
+            {
+                this.endGame();
+            }
         }
 
     }
@@ -117,6 +122,12 @@ public class GameManager
             g2d.setColor(Color.gray);
             g2d.fillRect(windowWidth/2 - 50, windowHeight/2 - 60, 40, 120);
             g2d.fillRect(windowWidth/2 + 10, windowHeight/2 - 60, 40, 120);
+        }
+        else if(this.currentMode == GameMode.End)
+        {
+            g2d.setColor(Color.gray);
+            g2d.fillRect(0,0, windowWidth, windowHeight + 60);
+            this.printGrade(g2d);
         }
 
     }
@@ -199,6 +210,61 @@ public class GameManager
             return minutes + ":0" + seconds;
         }
         return minutes + ":" + seconds;
+    }
+
+    public String getGrade()
+    {
+        if(this.timeElapsed < 5*60 && this.distanceTraveled < 0.80)
+        {
+            return "A+";
+        }
+        else if(this.timeElapsed < 5*60 && this.distanceTraveled < 0.85)
+        {
+            return "A";
+        }
+        else if(this.distanceTraveled < 0.80 && this.timeElapsed < 5*60 + 10)
+        {
+            return "A";
+        }
+        else if(this.timeElapsed < 5*60 + 10 && this.distanceTraveled < 0.85)
+        {
+            return "A-";
+        }
+        else if(this.timeElapsed < 5*60 + 10 && this.distanceTraveled < 0.90)
+        {
+            return "B+";
+        }
+        else if(this.distanceTraveled < 0.85 && this.timeElapsed < 5*60 + 15)
+        {
+            return "B+";
+        }
+        else if(this.distanceTraveled < 0.90 && this.timeElapsed < 5*60 + 15)
+        {
+            return "B";
+        }
+        else if(this.distanceTraveled < 0.97 && this.timeElapsed < 5*60 + 25)
+        {
+            return "C";
+        }
+        else
+        {
+            return "F";
+        }
+    }
+
+    public void printGrade(Graphics2D g2d)
+    {
+        // The actual grade
+        g2d.setFont(new Font("Courier", Font.PLAIN, 24));
+        g2d.setColor(Color.BLACK);
+        int pixelLength = g2d.getFontMetrics().stringWidth(this.getGrade());
+        g2d.drawString(this.getGrade(), this.windowWidth/2 - pixelLength/2, this.windowHeight);
+
+        // The word "Grade"
+        g2d.setFont(new Font("Courier", Font.PLAIN, 16));
+        g2d.setColor(Color.BLACK);
+        pixelLength = g2d.getFontMetrics().stringWidth("Grade");
+        g2d.drawString("Grade", this.windowWidth/2 - pixelLength/2, this.windowHeight - 32);
     }
 
     // ===================================
@@ -339,5 +405,9 @@ public class GameManager
         this.currentMode = GameMode.InGame;
         this.prevTime = (int)System.currentTimeMillis()/1000;
         this.needToRedraw = true;
+    }
+    public void endGame()
+    {
+        this.currentMode = GameMode.End;
     }
 }
