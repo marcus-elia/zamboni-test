@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
 
 // A wheel to be drawn on a ZamboniButton
 public class Wheel
@@ -30,5 +31,13 @@ public class Wheel
 
         g2d.setColor(Color.white);
         g2d.fill(this.innerWheel);
+    }
+
+
+    // Return true if the point is inside the wheel
+    public boolean contains(double x, double y)
+    {
+        Point2D p = new Point2D.Double(x,y);
+        return this.tire.contains(p);
     }
 }
