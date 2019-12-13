@@ -214,6 +214,10 @@ public class GameManager
     {
         return this.currentMode;
     }
+    public ZamboniButton getPlayButton()
+    {
+        return this.playButton;
+    }
 
     public double getRenderRadius()
     {
@@ -306,5 +310,11 @@ public class GameManager
                 }
             }
         }
+    }
+
+
+    public void startGame()
+    {
+        this.currentMode = GameMode.InGame;
     }
 }
