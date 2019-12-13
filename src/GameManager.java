@@ -45,7 +45,7 @@ public class GameManager
 
         this.zamboni = new Zamboni(this, this.border, 4 + 10, windowHeight/2,
                 36, 20, 3*Math.PI/2, .6, .1, .008,
-                Math.PI/16, new Color(20, 40, 100));
+                Math.PI/20, new Color(20, 40, 100));
 
 
         this.squareSize = 4;
@@ -242,9 +242,17 @@ public class GameManager
         {
             return "B";
         }
-        else if(this.distanceTraveled < 0.97 && this.timeElapsed < 5*60 + 25)
+        else if(this.distanceTraveled < 0.95 && this.timeElapsed < 5*60 + 20)
+        {
+            return "B-";
+        }
+        else if(this.distanceTraveled < 1 && this.timeElapsed < 5*60 + 30)
         {
             return "C";
+        }
+        else if(this.distanceTraveled < 1.1 && this.timeElapsed < 5*60 + 40)
+        {
+            return "D";
         }
         else
         {
@@ -258,13 +266,13 @@ public class GameManager
         g2d.setFont(new Font("Courier", Font.PLAIN, 24));
         g2d.setColor(Color.BLACK);
         int pixelLength = g2d.getFontMetrics().stringWidth(this.getGrade());
-        g2d.drawString(this.getGrade(), this.windowWidth/2 - pixelLength/2, this.windowHeight);
+        g2d.drawString(this.getGrade(), this.windowWidth/2 - pixelLength/2, this.windowHeight/2);
 
         // The word "Grade"
         g2d.setFont(new Font("Courier", Font.PLAIN, 16));
         g2d.setColor(Color.BLACK);
         pixelLength = g2d.getFontMetrics().stringWidth("Grade");
-        g2d.drawString("Grade", this.windowWidth/2 - pixelLength/2, this.windowHeight - 32);
+        g2d.drawString("Grade", this.windowWidth/2 - pixelLength/2, this.windowHeight/2 - 32);
     }
 
     // ===================================
