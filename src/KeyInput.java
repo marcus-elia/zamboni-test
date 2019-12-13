@@ -41,9 +41,17 @@ public class KeyInput extends KeyAdapter
         {
             manager.printUnzamboniedSquares();
         }
+        // Pausing
         else if(key == KeyEvent.VK_SPACE)
         {
-            manager.getZamboni().turboBoost(5);
+            if(manager.getCurrentMode() == GameMode.InGame)
+            {
+                manager.pause();
+            }
+            else if(manager.getCurrentMode() == GameMode.Paused)
+            {
+                manager.unpause();
+            }
         }
 
         if (key == KeyEvent.VK_W)
