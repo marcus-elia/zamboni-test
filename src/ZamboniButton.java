@@ -103,6 +103,7 @@ public class ZamboniButton
         backPart.lineTo(x + 76, y + 44);
         backPart.lineTo(x + 76, y + 47);
         backPart.lineTo(x + 12, y + 47);
+        this.backPartColor = new Color(15, 20, 15, 128);
     }
 
 
@@ -118,7 +119,7 @@ public class ZamboniButton
         g2d.setColor(this.bodyColor);
         g2d.fill(this.body);
 
-        g2d.setColor(Color.black);
+        g2d.setColor(this.backPartColor);
         g2d.fill(this.backPart);
 
         this.frontWheel.render(g2d);
@@ -150,6 +151,8 @@ public class ZamboniButton
                     this.bodyColor.getBlue(), 255);
             this.snowTankColor = new Color(this.snowTankColor.getRed(), this.snowTankColor.getGreen(),
                     this.snowTankColor.getBlue(), 255);
+            this.backPartColor = new Color(this.backPartColor.getRed(), this.backPartColor.getGreen(),
+                    this.backPartColor.getBlue(), 255);
         }
         else
         {
@@ -157,7 +160,11 @@ public class ZamboniButton
                     this.bodyColor.getBlue(), 128);
             this.snowTankColor = new Color(this.snowTankColor.getRed(), this.snowTankColor.getGreen(),
                     this.snowTankColor.getBlue(), 128);
+            this.backPartColor = new Color(this.backPartColor.getRed(), this.backPartColor.getGreen(),
+                    this.backPartColor.getBlue(), 128);
         }
+        this.frontWheel.setIsHighlighted(input);
+        this.backWheel.setIsHighlighted(input);
         this.isHighlighted = input;
     }
 }
