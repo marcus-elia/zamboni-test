@@ -25,6 +25,8 @@ public class GameManager
     private int timeElapsed; // In seconds
     private int prevTime;
 
+    private boolean needToRedraw; // Do we need to redraw everything this frame?
+
     // How far from the zamboni needs to be redrawn each frame
     private double renderRadius;
 
@@ -58,6 +60,8 @@ public class GameManager
         this.distanceTraveled = 0;
         this.percent = 100 - this.numSquaresLeft*100.0 / this.numSquaresOnRink;
         this.timeElapsed = 0;
+
+        this.needToRedraw = false;
 
     }
 
@@ -93,11 +97,12 @@ public class GameManager
                     this.getRenderRectXSize(), this.getRenderRectYSize());
 
             g2d.fillRect(0, windowHeight, windowWidth, 60);
-            if(this.numFrames == 0)
+            if(this.numFrames == 0 || this.needToRedraw)
             {
                 g2d.setColor(Color.gray);
                 g2d.fillRect(0,0, this.windowWidth, this.windowHeight);
                 this.surface.renderEverything(g2d);
+                this.needToRedraw = false;
             }
             this.surface.render(g2d, this.getTopLeftRenderCorner(), this.getRenderRectXSize(), this.getRenderRectYSize());
             this.border.render(g2d);
@@ -106,6 +111,12 @@ public class GameManager
             this.drawStrings(g2d);
 
             this.numFrames++;
+        }
+        else if(this.currentMode == GameMode.Paused)
+        {
+            g2d.setColor(Color.gray);
+            g2d.fillRect(windowWidth/2 - 50, windowHeight/2 - 60, 40, 120);
+            g2d.fillRect(windowWidth/2 + 10, windowHeight/2 - 60, 40, 120);
         }
 
     }
@@ -327,5 +338,6 @@ public class GameManager
     {
         this.currentMode = GameMode.InGame;
         this.prevTime = (int)System.currentTimeMillis()/1000;
+        this.needToRedraw = true;
     }
 }
