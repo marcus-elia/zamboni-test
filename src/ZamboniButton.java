@@ -10,6 +10,7 @@ public class ZamboniButton
 
     private Path2D snowTank;
     private Path2D body;
+    private Path2D backPart;
     private Wheel frontWheel;
     private Wheel backWheel;
 
@@ -21,6 +22,7 @@ public class ZamboniButton
         this.makeSnowTank();
         this.makeBody();
         this.makeWheels();
+        this.makeBackPart();
     }
 
     // ======================================
@@ -75,6 +77,18 @@ public class ZamboniButton
         this.frontWheel = new Wheel(x - 96, y + 30, 17, 12);
         this.backWheel = new Wheel(x, y + 30, 17, 12);
     }
+    public void makeBackPart()
+    {
+        backPart = new Path2D.Double();
+        backPart.moveTo(x + 12, y + 47);
+        backPart.lineTo(x + 30, y + 30);
+        backPart.lineTo(x + 54, y + 30);
+        backPart.lineTo(x + 64, y + 40);
+        backPart.lineTo(x + 64, y + 44);
+        backPart.lineTo(x + 76, y + 44);
+        backPart.lineTo(x + 76, y + 47);
+        backPart.lineTo(x + 12, y + 47);
+    }
 
 
 
@@ -88,6 +102,9 @@ public class ZamboniButton
 
         g2d.setColor(Color.blue);
         g2d.fill(this.body);
+
+        g2d.setColor(Color.black);
+        g2d.fill(this.backPart);
 
         this.frontWheel.render(g2d);
         this.backWheel.render(g2d);
