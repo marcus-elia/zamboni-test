@@ -22,6 +22,7 @@ public class Game extends Canvas implements Runnable
     {
         gameManager = new GameManager(WIDTH, HEIGHT - 40 - 20);
         this.addKeyListener(new KeyInput(gameManager));
+        this.addMouseMotionListener(new MouseMotionInput(gameManager));
         new Window(WIDTH, HEIGHT, "Zamboni", this);
 
     }
