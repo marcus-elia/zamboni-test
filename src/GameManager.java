@@ -212,45 +212,47 @@ public class GameManager
         return minutes + ":" + seconds;
     }
 
+    // Return the final grade, based on the time and distance traveled
     public String getGrade()
     {
-        if(this.timeElapsed < 5*60 && this.distanceTraveled < 0.80)
+        double miles = this.distanceTraveled*.4/5280;
+        if(this.timeElapsed < 5*60 && miles < 0.80)
         {
             return "A+";
         }
-        else if(this.timeElapsed < 5*60 && this.distanceTraveled < 0.85)
+        else if(this.timeElapsed < 5*60 && miles < 0.85)
         {
             return "A";
         }
-        else if(this.distanceTraveled < 0.80 && this.timeElapsed < 5*60 + 10)
+        else if(miles < 0.80 && this.timeElapsed < 5*60 + 10)
         {
             return "A";
         }
-        else if(this.timeElapsed < 5*60 + 10 && this.distanceTraveled < 0.85)
+        else if(this.timeElapsed < 5*60 + 10 && miles < 0.85)
         {
             return "A-";
         }
-        else if(this.timeElapsed < 5*60 + 10 && this.distanceTraveled < 0.90)
+        else if(this.timeElapsed < 5*60 + 10 && miles < 0.90)
         {
             return "B+";
         }
-        else if(this.distanceTraveled < 0.85 && this.timeElapsed < 5*60 + 15)
+        else if(miles < 0.85 && this.timeElapsed < 5*60 + 15)
         {
             return "B+";
         }
-        else if(this.distanceTraveled < 0.90 && this.timeElapsed < 5*60 + 15)
+        else if(miles < 0.90 && this.timeElapsed < 5*60 + 15)
         {
             return "B";
         }
-        else if(this.distanceTraveled < 0.95 && this.timeElapsed < 5*60 + 20)
+        else if(miles < 0.95 && this.timeElapsed < 5*60 + 20)
         {
             return "B-";
         }
-        else if(this.distanceTraveled < 1 && this.timeElapsed < 5*60 + 30)
+        else if(miles < 1 && this.timeElapsed < 5*60 + 30)
         {
             return "C";
         }
-        else if(this.distanceTraveled < 1.1 && this.timeElapsed < 5*60 + 40)
+        else if(miles < 1.1 && this.timeElapsed < 5*60 + 40)
         {
             return "D";
         }
