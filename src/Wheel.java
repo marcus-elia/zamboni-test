@@ -35,9 +35,8 @@ public class Wheel
 
 
     // Return true if the point is inside the wheel
-    public boolean contains(double x, double y)
+    public boolean contains(Point2D p)
     {
-        Point2D p = new Point2D.Double(x,y);
         return this.tire.contains(p);
     }
 }
